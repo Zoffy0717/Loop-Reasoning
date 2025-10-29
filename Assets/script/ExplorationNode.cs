@@ -5,12 +5,13 @@ using UnityEngine;
 public class ExplorationNode : MonoBehaviour, IInteractable
 {
     public CardSY[] dropCards;
+    private bool cardDroped = false;
 
     public bool autoDropOnEnter = true;
 
     public void Explore(PlayerInteraction player)
     {
-        if (dropCards == null || dropCards.Length == 0) return;
+        if (dropCards == null || dropCards.Length == 0 || cardDroped == true) return;
 
         foreach (var card in dropCards)
         {
@@ -18,6 +19,7 @@ public class ExplorationNode : MonoBehaviour, IInteractable
         }
 
         UI_CardPopup.Instance.ShowCards(dropCards);
+        cardDroped = true;
         ///gameObject.SetActive(false); // optional: only explore once
     }
 

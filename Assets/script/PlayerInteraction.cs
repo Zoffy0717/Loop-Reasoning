@@ -9,7 +9,9 @@ public class PlayerInteraction : MonoBehaviour
     public float interactRange = 1f;
     public LayerMask interactableMask;
     private IInteractable currentTarget;
+
     private bool isReasoningOpen = false;
+    public ReasoningBoardUI reasoningUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             isReasoningOpen = !isReasoningOpen;
+            reasoningUI.Toggle(isReasoningOpen);
         }
     }
 
@@ -93,5 +96,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentTarget = null;
         }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 }

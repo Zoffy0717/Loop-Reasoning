@@ -3,9 +3,11 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Cards/Synthesis System")]
 public class CombineSystem : ScriptableObject
 {
     public Recipe[] recipes;
+    
     // Start is called before the first frame update
     public CardSY TryCombine(CardSY cardA, CardSY cardB)
     {
