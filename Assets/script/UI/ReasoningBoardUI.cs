@@ -83,9 +83,8 @@ public class ReasoningBoardUI : MonoBehaviour
             slotBImage.color = Color.white;
         }
 
-        // Optional: check synthesis automatically
-        // if (slotACard != null && slotBCard != null)
-        //     synthesisSystem.TryCombine(slotACard, slotBCard);
+        if (slotACard != null && slotBCard != null)
+             synthesisSystem.TryCombine(slotACard, slotBCard);
     }
 }
 

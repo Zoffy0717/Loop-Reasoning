@@ -10,6 +10,7 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     public Image artworkImage;
     public TMP_Text nameText;
     public TMP_Text description;
+    private string cardIDs;
 
     [HideInInspector] public CardSY cardData;
     [HideInInspector] public ReasoningBoardUI reasoningBoard;

@@ -21,6 +21,9 @@ public class CombineSystem : ScriptableObject
             if (inputs.SequenceEqual(required))
             {
                 return recipe.resultCard;
+            } else
+            {
+                Debug.Log("fail");
             }
         }
         return null;

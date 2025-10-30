@@ -7,7 +7,7 @@ public class HandManager : MonoBehaviour
 {
 
     [Header("Prefabs & refs")]
-    public GameObject cardUIPrefab;         // UI prefab (must have CardUI component)
+    public GameObject cardUIPrefab;         
     public CardInventory cardInventory;     // reference to the player's inventory
     public Transform handTransform;     // parent RectTransform that holds the cards (under Canvas)
     public ReasoningBoardUI reasoningBoardUI;

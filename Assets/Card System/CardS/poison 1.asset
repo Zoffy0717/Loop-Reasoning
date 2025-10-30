@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b081f8e81d6dbda439817241688412ef, type: 3}
-  m_Name: result1
+  m_Name: poison 1
   m_EditorClassIdentifier: 
-  cardID: t001
-  displayName: deathcause
-  type: 4
+  cardID: c001
+  displayName: 
+  type: 3
   artwork: {fileID: 0}
-  description: The poison killed him
+  description: 
   keywords: []

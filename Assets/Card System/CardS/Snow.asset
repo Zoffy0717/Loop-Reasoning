@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b081f8e81d6dbda439817241688412ef, type: 3}
-  m_Name: hallway
+  m_Name: Snow
   m_EditorClassIdentifier: 
-  cardID: c002
-  displayName: Hallway
+  cardID: s002
+  displayName: Outside
   type: 0
-  artwork: {fileID: 21300000, guid: 19304a46871ef994f8c53249218af0b1, type: 3}
-  description: In order to get in the master bedroom, one has to move across this
-    hallway
+  artwork: {fileID: 0}
+  description: The snow has blocked every path back to the city
   keywords: []
