@@ -48,6 +48,10 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         transform.SetParent(canvas.transform);
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.8f;
+        if (reasoningBoard != null && reasoningBoard.cardDetailUI != null)
+        {
+            reasoningBoard.cardDetailUI.ShowDetails(cardData);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -72,6 +76,20 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         {
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = originalPosition;
+        }
+        if (reasoningBoard != null && reasoningBoard.cardDetailUI != null)
+        {
+            reasoningBoard.cardDetailUI.Hide();
+        }
+    }
+
+    public void Highlight(bool on)
+    {
+        var img = GetComponent<Image>();
+        if (img != null)
+        {
+            img.color = on ? new Color(1f, 1f, 0.5f, 1f) : Color.white;
+            // yellow tint when highlighted
         }
     }
 }

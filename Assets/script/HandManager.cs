@@ -11,6 +11,8 @@ public class HandManager : MonoBehaviour
     public CardInventory cardInventory;     // reference to the player's inventory
     public Transform handTransform;     // parent RectTransform that holds the cards (under Canvas)
     public ReasoningBoardUI reasoningBoardUI;
+    public CombineSystem CombineSystem;
+
 
     [Header("Layout")]
     public float fanSpread = 15f;           // max angle spread in degrees

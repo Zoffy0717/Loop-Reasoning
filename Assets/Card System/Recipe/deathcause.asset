@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa056bacbee52f24fbd6edfcf42afa8f, type: 3}
+  m_Script: {fileID: 11500000, guid: d350ee4fc4e0bd24ebbc28493d8ef3cb, type: 3}
   m_Name: deathcause
   m_EditorClassIdentifier: 
-  recipes:
-  - {fileID: 11400000, guid: 4ee66e0ba30f5df46a8612d0083d8a5c, type: 2}
-  - {fileID: 11400000, guid: 7f5db8df3b3847b45a2900cff6f5a2bc, type: 2}
-  - {fileID: 11400000, guid: 6137f071cf676a84ca01e5c9d0df68e5, type: 2}
+  inputCardIDs:
+  - c001
+  - c002
+  resultCard: {fileID: 11400000, guid: db26d883a302bb44ea85846157288d00, type: 2}

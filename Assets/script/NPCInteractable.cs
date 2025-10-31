@@ -9,7 +9,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable
     public CardSY npcCard;
 
     private bool cardDroped = false;
-    
+
     public void Interact(PlayerInteraction player)
     {
         if (!DialogueUI.Instance.IsActive())

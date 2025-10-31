@@ -21,11 +21,23 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentTarget != null)
+        {
+            var mono = currentTarget as MonoBehaviour;
+            if (mono == null || !mono.gameObject.activeInHierarchy)
+            {
+                currentTarget = null;
+                Debug.Log("Cleared invalid currentTarget (object was disabled or destroyed)");
+            }
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (currentTarget != null)
             {
                 currentTarget.Interact(this);
+
+                currentTarget = null;
+
             }
             else
             {
@@ -61,6 +73,7 @@ public class PlayerInteraction : MonoBehaviour
                 closest = h;
             }
         }
+        Debug.Log($"Closest collider: {closest.name} (root:{closest.transform.root.name})");
 
         if (closest != null)
         {
@@ -89,7 +102,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExist2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         var interactable = other.GetComponent<IInteractable>();
         if (interactable != null && interactable == currentTarget)

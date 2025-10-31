@@ -9,6 +9,8 @@ public class ExplorationNode : MonoBehaviour, IInteractable
 
     public bool autoDropOnEnter = true;
 
+    public bool destroyAfter;
+
     public void Explore(PlayerInteraction player)
     {
         if (dropCards == null || dropCards.Length == 0 || cardDroped == true) return;
@@ -20,7 +22,12 @@ public class ExplorationNode : MonoBehaviour, IInteractable
 
         UI_CardPopup.Instance.ShowCards(dropCards);
         cardDroped = true;
-        ///gameObject.SetActive(false); // optional: only explore once
+        if (destroyAfter)
+        {
+            Collider2D myCol = GetComponent<Collider2D>();
+            myCol.enabled = false;
+            gameObject.SetActive(false); // optional: only explore once
+        }
     }
 
     public void Interact(PlayerInteraction player)

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: New Recipe
   m_EditorClassIdentifier: 
   inputCardIDs:
-  - c001
-  - c002
+  - n001
+  - s001
   resultCard: {fileID: 11400000, guid: c0517222a09d70749852192a3b70fb8b, type: 2}

@@ -10,7 +10,7 @@ public class ReasoningBoardUI : MonoBehaviour
     public HandManager handManager; 
     public CombineSystem synthesisSystem;
     public CardInventory playerInventory;
-
+    public CardDetailUI cardDetailUI;
 
     public Image slotAImage;
     public Image slotBImage;
@@ -84,7 +84,15 @@ public class ReasoningBoardUI : MonoBehaviour
         }
 
         if (slotACard != null && slotBCard != null)
-             synthesisSystem.TryCombine(slotACard, slotBCard);
+        {
+            var resultCard = synthesisSystem.TryCombine(slotACard, slotBCard);
+            if (resultCard != null)
+            {
+                playerInventory.AddCard(resultCard);
+                ClearSlots();
+            }
+        }
+            
     }
 }
 

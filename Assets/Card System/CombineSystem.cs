@@ -20,12 +20,29 @@ public class CombineSystem : ScriptableObject
 
             if (inputs.SequenceEqual(required))
             {
+                Debug.Log("success");
                 return recipe.resultCard;
+                
             } else
             {
                 Debug.Log("fail");
             }
         }
+        Debug.Log("Error");
         return null;
+    }
+
+    public bool CanCombine(CardSY cardA, CardSY cardB)
+    {
+        if (cardA == null || cardB == null) return false;
+
+        var inputs = new[] { cardA.cardID, cardB.cardID }.OrderBy(x => x).ToArray();
+        foreach (var recipe in recipes)
+        {
+            var required = recipe.inputCardIDs.OrderBy(x => x).ToArray();
+            if (inputs.SequenceEqual(required))
+                return true;
+        }
+        return false;
     }
 }

@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b081f8e81d6dbda439817241688412ef, type: 3}
-  m_Name: poison 1
+  m_Script: {fileID: 11500000, guid: 03cc082e0f4575842bfc3f74628df291, type: 3}
+  m_Name: Body
   m_EditorClassIdentifier: 
-  cardID: c001
-  displayName: Poison
-  type: 3
-  artwork: {fileID: 0}
-  description: The label on it says cyanide
-  keywords: []
+  npcName: You
+  dialogueLines:
+  - Here lie the body of XXX
+  - with white foam coming out of his mouth

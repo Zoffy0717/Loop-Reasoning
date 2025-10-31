@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b081f8e81d6dbda439817241688412ef, type: 3}
-  m_Name: Poison
+  m_Name: causedeath
   m_EditorClassIdentifier: 
-  cardID: n001
-  displayName: Chef
-  type: 2
-  artwork: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  description: 'The chef of the house, been here for over 20 years
-
-'
+  cardID: t002
+  displayName: DeathCause
+  type: 4
+  artwork: {fileID: 0}
+  description: The cyanide is the cause of the death
   keywords: []
