@@ -33,7 +33,10 @@ public class ReasoningBoardUI : MonoBehaviour
         uiRoot.SetActive(show);
 
         // Pause or resume game if needed
-        Time.timeScale = show ? 0f : 1f;
+        if (show)
+            GamePauseManager.Instance.RequestPause();
+        else
+            GamePauseManager.Instance.RequestResume();
 
         // Refresh cards when board opens
         if (show && handManager != null)

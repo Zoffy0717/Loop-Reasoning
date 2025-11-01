@@ -28,12 +28,13 @@ public class DialogueUI : MonoBehaviour
     }
     public void StartDialogue(DialogueData data)
     {
+        Debug.Log("PauseManager found: " + (GamePauseManager.Instance != null));
         if (data == null) return;
         currentLines = data.dialogueLines;
         currentIndex = 0;
         isActive = true;
 
-        Time.timeScale = 0f;
+        GamePauseManager.Instance.RequestPause();
 
         npcNameText.text = data.npcName;
         dialoguePanel.SetActive(true);
@@ -64,7 +65,7 @@ public class DialogueUI : MonoBehaviour
         isActive = false;
         currentLines = null;
 
-        Time.timeScale = 1f;
+        GamePauseManager.Instance.RequestResume();
     }
 
     public bool IsActive() => isActive;

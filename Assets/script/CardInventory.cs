@@ -11,6 +11,8 @@ public class CardInventory : MonoBehaviour
     
     public event CardAddedHandler OnCardAdded;
 
+    public GameObject boardHintUI;
+
     public void AddCard(CardSY newCard)
     {
         if (newCard == null)
@@ -25,7 +27,14 @@ public class CardInventory : MonoBehaviour
         collectedCards.Add(newCard);
 
         OnCardAdded?.Invoke(newCard);
-
+        
+        if (collectedCards.Count == 2)
+        {
+            boardHintUI.SetActive(true);
+        }
+        else{
+            boardHintUI.SetActive(false);
+        }
         if (collectedCards.Count >= 7)
         {
             Debug.Log("Player reached 7 cards! Switching to End Scene...");

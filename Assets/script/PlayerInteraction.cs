@@ -51,13 +51,6 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             isReasoningOpen = !isReasoningOpen;
-            if (isReasoningOpen) {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
             reasoningUI.Toggle(isReasoningOpen);
         }
 

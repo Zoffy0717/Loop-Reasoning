@@ -24,12 +24,15 @@ public class UI_CardPopup : MonoBehaviour
     public void ShowCards(CardSY[] cards)
     {
         popupRoot.SetActive(true);
-        Time.timeScale = 0f;
+        GamePauseManager.Instance?.RequestPause();
     }
 
     void ClosePopup()
     {
         popupRoot.SetActive(false);
-        Time.timeScale = 1f;
+        if (DialogueUI.Instance == null || !DialogueUI.Instance.IsActive())
+        {
+            GamePauseManager.Instance?.RequestResume();
+        }
     }
 }
