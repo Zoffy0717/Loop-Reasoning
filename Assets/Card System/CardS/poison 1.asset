@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: c001
   displayName: Poison
   type: 3
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 19304a46871ef994f8c53249218af0b1, type: 3}
   description: The label on it says cyanide
   keywords: []

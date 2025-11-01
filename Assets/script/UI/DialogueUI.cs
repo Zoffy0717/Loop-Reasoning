@@ -33,6 +33,8 @@ public class DialogueUI : MonoBehaviour
         currentIndex = 0;
         isActive = true;
 
+        Time.timeScale = 0f;
+
         npcNameText.text = data.npcName;
         dialoguePanel.SetActive(true);
         dialogueText.text = currentLines[currentIndex];
@@ -61,6 +63,8 @@ public class DialogueUI : MonoBehaviour
         dialoguePanel.SetActive(false );
         isActive = false;
         currentLines = null;
+
+        Time.timeScale = 1f;
     }
 
     public bool IsActive() => isActive;

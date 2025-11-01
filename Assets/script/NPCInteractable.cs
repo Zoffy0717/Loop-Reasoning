@@ -7,8 +7,9 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 
     public DialogueData dialogueData;
     public CardSY npcCard;
-
+    public GameObject interactHintUI;
     private bool cardDroped = false;
+    
 
     public void Interact(PlayerInteraction player)
     {

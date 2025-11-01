@@ -12,7 +12,7 @@ public class HandManager : MonoBehaviour
     public Transform handTransform;     // parent RectTransform that holds the cards (under Canvas)
     public ReasoningBoardUI reasoningBoardUI;
     public CombineSystem CombineSystem;
-
+    private bool isDragging = false;
 
     [Header("Layout")]
     public float fanSpread = 15f;           // max angle spread in degrees
@@ -21,6 +21,8 @@ public class HandManager : MonoBehaviour
 
     // cached instances for reuse
     private List<GameObject> instantiatedCards = new List<GameObject>();
+
+    private List<CardUI> activeCardUIs = new List<CardUI>();//For Hightlight
 
     private void Awake()
     {
@@ -49,8 +51,8 @@ public class HandManager : MonoBehaviour
 
     private void OnCardAdded(CardSY newCard)
     {
-        
-        RefreshHand();
+        if (!isDragging)
+            RefreshHand();
     }
 
     public void RefreshHand()
@@ -69,7 +71,8 @@ public class HandManager : MonoBehaviour
             GameObject go = Instantiate(cardUIPrefab, handTransform);
             CardUI cardUI = go.GetComponent<CardUI>();
             if (cardUI != null)
-                cardUI.Setup(cardData, reasoningBoardUI); // ✅ pass reference
+                cardUI.Setup(cardData, reasoningBoardUI, this); // ✅ pass reference
+                activeCardUIs.Add(cardUI);
 
             instantiatedCards.Add(go);
         }
@@ -86,6 +89,7 @@ public class HandManager : MonoBehaviour
         {
             instantiatedCards[0].transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             instantiatedCards[0].transform.localPosition = new Vector3(0f, 0f, 0f);
+            return;
         }
         // central index (0 based)
         float mid = (cardCount - 1) / 2f;
@@ -102,5 +106,31 @@ public class HandManager : MonoBehaviour
 
             instantiatedCards[i].transform.localPosition = new Vector3(horizontalOffset, verticalOffset, 0f);
         }
+    }
+
+    public void HighlightCompatibleCards(CardSY draggedCard)
+    {
+        foreach (var ui in activeCardUIs)
+        {
+            if (ui == null || ui.cardData == null) continue;
+            if (ui.cardData == draggedCard) continue;
+
+            bool compatible = CombineSystem.CanCombine(draggedCard, ui.cardData);
+            ui.Highlight(compatible);
+        }
+    }
+
+    public void ClearHighlights()
+    {
+        foreach (var ui in activeCardUIs)
+        {
+            if (ui == null) continue;
+            ui.Highlight(false);
+        }
+    }
+
+    public void SetDragging(bool dragging)
+    {
+        isDragging = dragging;
     }
 }

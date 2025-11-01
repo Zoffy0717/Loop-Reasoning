@@ -90,6 +90,8 @@ public class ReasoningBoardUI : MonoBehaviour
             {
                 playerInventory.AddCard(resultCard);
                 ClearSlots();
+                if (handManager != null)
+                    handManager.RefreshHand();
             }
         }
             

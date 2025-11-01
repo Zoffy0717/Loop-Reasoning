@@ -24,10 +24,12 @@ public class UI_CardPopup : MonoBehaviour
     public void ShowCards(CardSY[] cards)
     {
         popupRoot.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     void ClosePopup()
     {
         popupRoot.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

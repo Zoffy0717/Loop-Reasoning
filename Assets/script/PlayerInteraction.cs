@@ -9,18 +9,22 @@ public class PlayerInteraction : MonoBehaviour
     public float interactRange = 1f;
     public LayerMask interactableMask;
     private IInteractable currentTarget;
+    public GameObject interactHintUI;
+    private NPCInteractable currentHintNPC;
 
     private bool isReasoningOpen = false;
     public ReasoningBoardUI reasoningUI;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (interactHintUI != null)
+            interactHintUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateHintUI();
         if (currentTarget != null)
         {
             var mono = currentTarget as MonoBehaviour;
@@ -47,7 +51,26 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             isReasoningOpen = !isReasoningOpen;
+            if (isReasoningOpen) {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
             reasoningUI.Toggle(isReasoningOpen);
+        }
+
+        if (currentHintNPC)
+        {
+            float dist = Vector2.Distance(transform.position, currentHintNPC.transform.position);
+            if (dist > interactRange)
+            {
+                if (currentHintNPC.interactHintUI)
+                    currentHintNPC.interactHintUI.SetActive(false);
+
+                currentHintNPC = null;
+            }
         }
     }
 
@@ -57,6 +80,10 @@ public class PlayerInteraction : MonoBehaviour
 
         if (hits.Length == 0)
         {
+            if (currentHintNPC && currentHintNPC.interactHintUI)
+                currentHintNPC.interactHintUI.SetActive(false);
+
+            currentHintNPC = null;
             Debug.Log("No interactables nearby.");
             return;
         }
@@ -78,11 +105,28 @@ public class PlayerInteraction : MonoBehaviour
         if (closest != null)
         {
             var interactable = closest.GetComponent<IInteractable>();
+
             if (interactable != null)
             {
                 currentTarget = interactable;
-                interactable.Interact(this);
                 Debug.Log($"Interacted with: {closest.name}");
+
+                var npc = closest.GetComponent<NPCInteractable>();
+                if (npc != null)
+                {
+                    // Hide old hint if switching targets
+                    if (currentHintNPC && currentHintNPC != npc && currentHintNPC.interactHintUI)
+                        currentHintNPC.interactHintUI.SetActive(false);
+
+                    // Show new hint
+                    currentHintNPC = npc;
+                    if (npc.interactHintUI)
+                    {
+                        npc.interactHintUI.SetActive(true);
+                    }
+                }
+
+                interactable.Interact(this);
             }
         }
     }
@@ -110,9 +154,45 @@ public class PlayerInteraction : MonoBehaviour
             currentTarget = null;
         }
     }
+
+    private void UpdateHintUI()
+    {
+        // Look for all interactables in range
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRange, interactableMask);
+
+        NPCInteractable nearestNPC = null;
+        float closestDist = Mathf.Infinity;
+
+        foreach (var h in hits)
+        {
+            NPCInteractable npc = h.GetComponent<NPCInteractable>();
+            if (npc != null)
+            {
+                Vector2 closestPoint = h.ClosestPoint(transform.position);
+                float dist = Vector2.Distance(transform.position, closestPoint);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    nearestNPC = npc;
+                }
+            }
+        }
+
+        // Hide previous hint if switching or leaving range
+        if (currentHintNPC != null && currentHintNPC != nearestNPC && currentHintNPC.interactHintUI != null)
+            currentHintNPC.interactHintUI.SetActive(false);
+
+        currentHintNPC = nearestNPC;
+
+        // Show the hint if we found a nearby NPC
+        if (currentHintNPC != null && currentHintNPC.interactHintUI != null)
+            currentHintNPC.interactHintUI.SetActive(true);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
+
 }

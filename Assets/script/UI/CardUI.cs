@@ -20,11 +20,13 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private CanvasGroup canvasGroup;
     private Transform originalParent;
     private Vector2 originalPosition;
+    private HandManager handManager;
 
-    public void Setup(CardSY card, ReasoningBoardUI board)
+    public void Setup(CardSY card, ReasoningBoardUI board, HandManager manager)
     {
         cardData = card;
         reasoningBoard = board;
+        handManager = manager;
 
         if (artworkImage != null) artworkImage.sprite = card.artwork;
         if (nameText != null) nameText.text = card.displayName;
@@ -41,13 +43,25 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (this == null || cardData == null) return;
+
+        handManager?.SetDragging(true);
+
         originalParent = transform.parent;
         originalPosition = rectTransform.anchoredPosition;
 
-        // Move to top of hierarchy so it’s not hidden behind other cards
+        if (canvas == null) return;
+
         transform.SetParent(canvas.transform);
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 0.8f;
+        if (canvasGroup != null)
+        {
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0.8f;
+        }
+
+        if (handManager != null)
+            handManager.HighlightCompatibleCards(cardData);
+
         if (reasoningBoard != null && reasoningBoard.cardDetailUI != null)
         {
             reasoningBoard.cardDetailUI.ShowDetails(cardData);
@@ -67,12 +81,21 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Re-enable raycast blocking
-        canvasGroup.blocksRaycasts = true;
-        canvasGroup.alpha = 1f;
+        if (this == null) return;
+
+        handManager?.SetDragging(false);
+
+        if (canvasGroup != null)
+        {
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 1f;
+        }
+
+        if (handManager != null)
+            handManager.ClearHighlights();
 
         // If the card was not dropped onto a valid SlotDropArea, return it to hand
-        if (transform.parent == canvas.transform)
+        if (transform != null && transform.parent == canvas.transform)
         {
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = originalPosition;
@@ -85,11 +108,10 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void Highlight(bool on)
     {
-        var img = GetComponent<Image>();
+        var img = artworkImage != null ? artworkImage : GetComponentInChildren<Image>();
         if (img != null)
         {
             img.color = on ? new Color(1f, 1f, 0.5f, 1f) : Color.white;
-            // yellow tint when highlighted
         }
     }
 }
