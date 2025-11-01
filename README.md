@@ -1,16 +1,22 @@
 # Loop-Reasoning
+Game title: Loop Reasoning
+Team Name: TBD
+Team member:
+Hankun Liu, Designer 
+Nathan Liu, Programmer 
+Xiyue Feng, Writer 
+Weiyi Kong, Artist 
+Yingwei Huang, Artist 
 
-按键：
-ad 移动
-e 交互/继续对话
-f 打开推理面板
-c 关闭卡片
+Control:
+ad - movement
+e - interact
+f - open/close reasoning board
+c - close card pop up
 
-制作卡片：
-在asset右键
-选create - card - cards
-卡片具体：
-id -  用于合成
-name - 用于区分
-type - 卡片分类
-description - 卡片具体信息
+In reasoning board:
+click and drag each card to the slot
+the card that can synthesis will highlight in yellow
+When two correct cards are placed in the slot, a new card is formed.
+
+Goal：To test whether the current gameplay idea is fun and feasible, and to gain feedback from the playtest to update and improve the gameplay. To test whether the synthesis system in the reasoning scene can work fluently and effectively.
