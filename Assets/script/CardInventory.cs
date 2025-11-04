@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CardInventory : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class CardInventory : MonoBehaviour
     public event CardAddedHandler OnCardAdded;
 
     public GameObject boardHintUI;
+
+    public TMP_Text endHint;
+
+    private float introDuration = 10f;
 
     public void AddCard(CardSY newCard)
     {
@@ -37,9 +42,7 @@ public class CardInventory : MonoBehaviour
         }
         if (collectedCards.Count >= 7)
         {
-            Debug.Log("Player reached 7 cards! Switching to End Scene...");
-            Time.timeScale = 1f; // just in case game was paused
-            SceneManager.LoadScene(2); // <-- make sure the name matches your scene name in Build Settings
+            StartCoroutine(EndGame());
         }
     }
 
@@ -51,6 +54,15 @@ public class CardInventory : MonoBehaviour
     public List<CardSY> GetAllCards()
     {
         return collectedCards;
+    }
+
+    private IEnumerator EndGame()
+    {
+        endHint.text = "Tech Demo will end in 10 sec.";
+        Time.timeScale = 1f; // just in case game was paused
+        yield return new WaitForSeconds(introDuration);
+
+        SceneManager.LoadScene(2);
     }
 
 }

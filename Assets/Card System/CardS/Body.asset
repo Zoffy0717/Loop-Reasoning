@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b081f8e81d6dbda439817241688412ef, type: 3}
-  m_Name: Snow
+  m_Name: Body
   m_EditorClassIdentifier: 
   cardID: c002
   displayName: Body

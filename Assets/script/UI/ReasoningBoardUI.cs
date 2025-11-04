@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ReasoningBoardUI : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ReasoningBoardUI : MonoBehaviour
 
     public Image slotAImage;
     public Image slotBImage;
+    public TMP_Text slotAName;
+    public TMP_Text slotBName;
+
 
     private CardSY slotACard;
     private CardSY slotBCard;
@@ -60,11 +64,16 @@ public class ReasoningBoardUI : MonoBehaviour
             if (slotBImage != null)
                 slotBImage.sprite = null;
 
-            // Optional: reset alpha if you use transparency
-            if (slotAImage != null)
-                slotAImage.color = new Color(1, 1, 1, 0.2f); // faint empty look
-            if (slotBImage != null)
-                slotBImage.color = new Color(1, 1, 1, 0.2f);
+        if (slotAName.text != null)
+            slotAName.text = null;
+
+        if (slotBName.text != null)
+            slotBName.text = null;
+
+        //if (slotAImage != null)
+        //        slotAImage.color = new Color(1, 1, 1, 0.2f); // faint empty look
+        //    if (slotBImage != null)
+        //        slotBImage.color = new Color(1, 1, 1, 0.2f);
 
             // Reset data references
             slotACard = null;
@@ -78,12 +87,14 @@ public class ReasoningBoardUI : MonoBehaviour
             slotACard = card;
             slotAImage.sprite = card.artwork;
             slotAImage.color = Color.white;
+            slotAName.text = card.name;
         }
         else if (slotName == "B")
         {
             slotBCard = card;
             slotBImage.sprite = card.artwork;
             slotBImage.color = Color.white;
+            slotBName.text = card.name;
         }
 
         if (slotACard != null && slotBCard != null)
