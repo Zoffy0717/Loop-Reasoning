@@ -38,9 +38,9 @@ public class ReasoningBoardUI : MonoBehaviour
 
         // Pause or resume game if needed
         if (show)
-            GamePauseManager.Instance.RequestPause();
+            GamePauseManager.Instance?.RequestPause("ReasoningBoard");
         else
-            GamePauseManager.Instance.RequestResume();
+            GamePauseManager.Instance?.RequestResume("ReasoningBoard");
 
         // Refresh cards when board opens
         if (show && handManager != null)

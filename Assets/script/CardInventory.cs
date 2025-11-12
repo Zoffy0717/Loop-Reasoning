@@ -42,7 +42,7 @@ public class CardInventory : MonoBehaviour
         }
         if (collectedCards.Count >= 7)
         {
-            StartCoroutine(EndGame());
+            //StartCoroutine(EndGame());
         }
     }
 
@@ -63,6 +63,12 @@ public class CardInventory : MonoBehaviour
         yield return new WaitForSeconds(introDuration);
 
         SceneManager.LoadScene(2);
+    }
+
+
+    public void RemoveCard(CardSY card)
+    {
+        collectedCards.Remove(card);
     }
 
 }

@@ -4,37 +4,42 @@ using UnityEngine;
 
 public class GamePauseManager : MonoBehaviour
 {
-    public static GamePauseManager Instance { get; private set; }
+    public static GamePauseManager Instance;
 
-    private int pauseRequests = 0; // how many systems want the game paused
+    private HashSet<string> pauseSources = new HashSet<string>();
 
-    void Awake()
+    private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
+        if (Instance == null)
+            Instance = this;
+        else
             Destroy(gameObject);
-            return;
+    }
+
+    public void RequestPause(string source)
+    {
+        if (!pauseSources.Contains(source))
+        {
+            pauseSources.Add(source);
+            UpdatePauseState();
+            Debug.Log($"Paused by: {source}");
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
-    public void RequestPause()
+    public void RequestResume(string source)
     {
-        pauseRequests++;
-        UpdatePauseState();
-    }
-
-    public void RequestResume()
-    {
-        pauseRequests = Mathf.Max(0, pauseRequests - 1);
-        UpdatePauseState();
+        if (pauseSources.Contains(source))
+        {
+            pauseSources.Remove(source);
+            UpdatePauseState();
+            Debug.Log($"Resumed by: {source}");
+        }
     }
 
     private void UpdatePauseState()
     {
-        Time.timeScale = (pauseRequests > 0) ? 0f : 1f;
+        Time.timeScale = (pauseSources.Count > 0) ? 0f : 1f;
     }
 
-    public bool IsPaused() => pauseRequests > 0;
+    public bool IsPaused => pauseSources.Count > 0;
 }

@@ -34,7 +34,7 @@ public class DialogueUI : MonoBehaviour
         currentIndex = 0;
         isActive = true;
 
-        GamePauseManager.Instance.RequestPause();
+        GamePauseManager.Instance?.RequestPause("Dialogue");
 
         npcNameText.text = data.npcName;
         dialoguePanel.SetActive(true);
@@ -65,7 +65,7 @@ public class DialogueUI : MonoBehaviour
         isActive = false;
         currentLines = null;
 
-        GamePauseManager.Instance.RequestResume();
+        GamePauseManager.Instance?.RequestResume("Dialogue");
     }
 
     public bool IsActive() => isActive;

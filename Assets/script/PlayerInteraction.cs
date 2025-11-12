@@ -150,36 +150,64 @@ public class PlayerInteraction : MonoBehaviour
 
     private void UpdateHintUI()
     {
-        // Look for all interactables in range
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRange, interactableMask);
 
-        NPCInteractable nearestNPC = null;
+        IInteractable nearest = null;
         float closestDist = Mathf.Infinity;
 
+        // find nearest interactable within range
         foreach (var h in hits)
         {
-            NPCInteractable npc = h.GetComponent<NPCInteractable>();
-            if (npc != null)
+            var interactable = h.GetComponent<IInteractable>();
+            if (interactable != null)
             {
-                Vector2 closestPoint = h.ClosestPoint(transform.position);
-                float dist = Vector2.Distance(transform.position, closestPoint);
+                float dist = Vector2.Distance(transform.position, h.transform.position);
                 if (dist < closestDist)
                 {
                     closestDist = dist;
-                    nearestNPC = npc;
+                    nearest = interactable;
                 }
             }
         }
 
-        // Hide previous hint if switching or leaving range
-        if (currentHintNPC != null && currentHintNPC != nearestNPC && currentHintNPC.interactHintUI != null)
-            currentHintNPC.interactHintUI.SetActive(false);
+        // --- handle previous hint hiding ---
+        // hide NPC hint if player moved away or changed target
+        if (currentHintNPC != null && (nearest as NPCInteractable) != currentHintNPC)
+        {
+            if (currentHintNPC.interactHintUI)
+                currentHintNPC.interactHintUI.SetActive(false);
+            currentHintNPC = null;
+        }
 
-        currentHintNPC = nearestNPC;
+        // hide door hints if no doors nearby
+        var allDoors = FindObjectsOfType<LockedDoor>();
+        foreach (var door in allDoors)
+        {
+            if (door.hintUI != null)
+            {
+                float d = Vector2.Distance(transform.position, door.transform.position);
+                if (d > interactRange)
+                    door.hintUI.SetActive(false);
+            }
+        }
 
-        // Show the hint if we found a nearby NPC
-        if (currentHintNPC != null && currentHintNPC.interactHintUI != null)
-            currentHintNPC.interactHintUI.SetActive(true);
+        // --- show the current nearest hint ---
+        NPCInteractable nearestNPC = nearest as NPCInteractable;
+        if (nearestNPC != null)
+        {
+            currentHintNPC = nearestNPC;
+            if (nearestNPC.interactHintUI != null)
+                nearestNPC.interactHintUI.SetActive(true);
+        }
+        else
+        {
+            var door = (nearest as MonoBehaviour)?.GetComponent<LockedDoor>();
+            if (door != null && door.hintUI != null)
+                door.hintUI.SetActive(true);
+        }
+
+        // update the currentTarget for interaction
+        currentTarget = nearest;
     }
 
     private void OnDrawGizmosSelected()
