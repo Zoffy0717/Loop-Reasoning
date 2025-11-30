@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab5bb4b5b0577a4fadcb755f90cc8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueData: {fileID: 11400000, guid: e353883f0893b7648bb5a73fc1ed192d, type: 2}
+  dialogueData: {fileID: 0}
   npcCard: {fileID: 11400000, guid: 3bf463e8d7ffb4c4b87d96045674f984, type: 2}
   interactHintUI: {fileID: 1119284554872035318}
 --- !u!70 &2345871878597004261

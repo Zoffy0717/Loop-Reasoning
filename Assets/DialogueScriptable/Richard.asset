@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03cc082e0f4575842bfc3f74628df291, type: 3}
-  m_Name: Doctor
+  m_Name: Richard
   m_EditorClassIdentifier: 
-  npcName: Anna
+  npcName: Richard
   dialogueLines:
-  - "Oh\u2014you're one of the stranded guests? My apologies, I\u2019ve just come
-    back from the infirmary. . "
-  - "I\u2019ll file the Captain\u2019s medical report shortly."
-  - "Nights like this, with the storm clawing at the windows\u2026 people tend to
-    get anxious. You should take care of yourself."
+  - "Hey there\u2014tourist, right? I\u2019m here for the scenery myself\u2026 didn\u2019t
+    expect to get snowed in like this. "
+  - "Hope you don\u2019t mind the flash; I\u2019m trying to capture the \u2018mood\u2019
+    of this place."

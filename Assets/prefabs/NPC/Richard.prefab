@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7051918340737280216}
   - component: {fileID: 4484475632184234295}
   - component: {fileID: 7960464649011807891}
+  - component: {fileID: -5600405964531102455}
   m_Layer: 6
   m_Name: Richard
   m_TagString: Untagged
@@ -137,6 +138,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.84, y: 10.799999}
   m_Direction: 0
+--- !u!114 &-5600405964531102455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232868236376423222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce911f6b929d7b4ab6eed642f362411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSet: {fileID: 11400000, guid: 8ee450379f1df1b42ae8fa8fa46ebc6d, type: 2}
 --- !u!1 &3747961279684127919
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,16 +18,16 @@ MonoBehaviour:
     dialogue: {fileID: 11400000, guid: 23858d565c53ff54190ed8d224f30468, type: 2}
   - day: 1
     time: 1
-    dialogue: {fileID: 11400000, guid: 23858d565c53ff54190ed8d224f30468, type: 2}
+    dialogue: {fileID: 11400000, guid: 63a9bbcfe7abf614fb5d3251475edbbb, type: 2}
   - day: 1
     time: 2
-    dialogue: {fileID: 11400000, guid: 23858d565c53ff54190ed8d224f30468, type: 2}
+    dialogue: {fileID: 11400000, guid: 63a9bbcfe7abf614fb5d3251475edbbb, type: 2}
   - day: 2
     time: 0
-    dialogue: {fileID: 11400000, guid: 23858d565c53ff54190ed8d224f30468, type: 2}
+    dialogue: {fileID: 11400000, guid: 63a9bbcfe7abf614fb5d3251475edbbb, type: 2}
   - day: 2
     time: 1
-    dialogue: {fileID: 11400000, guid: 23858d565c53ff54190ed8d224f30468, type: 2}
+    dialogue: {fileID: 11400000, guid: 63a9bbcfe7abf614fb5d3251475edbbb, type: 2}
   - day: 2
     time: 2
     dialogue: {fileID: 11400000, guid: 23858d565c53ff54190ed8d224f30468, type: 2}

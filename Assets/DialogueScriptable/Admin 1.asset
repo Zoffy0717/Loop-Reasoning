@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03cc082e0f4575842bfc3f74628df291, type: 3}
-  m_Name: Doctor
+  m_Name: Admin 1
   m_EditorClassIdentifier: 
-  npcName: Anna
+  npcName: Administrator
   dialogueLines:
-  - "Oh\u2014you're one of the stranded guests? My apologies, I\u2019ve just come
-    back from the infirmary. . "
-  - "I\u2019ll file the Captain\u2019s medical report shortly."
-  - "Nights like this, with the storm clawing at the windows\u2026 people tend to
-    get anxious. You should take care of yourself."
+  - "Ah\u2014sorry, I\u2019ve gotta get this damn furnace working again. "
+  - "Folks don\u2019t like the cold, and tonight\u2026 well, no one wants to be stuck
+    out there. "
+  - If you get turned around in this place, just holler for me.
