@@ -12,6 +12,7 @@ public class HandManager : MonoBehaviour
     public Transform handTransform;     // parent RectTransform that holds the cards (under Canvas)
     public ReasoningBoardUI reasoningBoardUI;
     public CombineSystem CombineSystem;
+    public TestimonyCombineSystem testimonySystem;
     private bool isDragging = false;
 
     [Header("Layout")]
@@ -106,6 +107,116 @@ public class HandManager : MonoBehaviour
 
             instantiatedCards[i].transform.localPosition = new Vector3(horizontalOffset, verticalOffset, 0f);
         }
+    }
+
+    public void ShowFiltered(CardType type)
+    {
+        foreach (var go in instantiatedCards)
+            Destroy(go);
+        instantiatedCards.Clear();
+
+        List<CardSY> cards = cardInventory.GetCardsByType(type); // assumes you added this
+        foreach (var card in cards)
+        {
+            GameObject ui = Instantiate(cardUIPrefab, handTransform);
+            CardUI cardUI = ui.GetComponent<CardUI>();
+            if (cardUI != null)
+                cardUI.Setup(card, reasoningBoardUI, this); // <-- pass 'this' here
+            instantiatedCards.Add(ui);
+        }
+
+        UpdateHandVisuals();
+    }
+
+    public void ShowScenes()
+    {
+        ShowFiltered(CardType.Scene);
+    }
+
+    public void ShowItems()
+    {
+        ShowFiltered(CardType.Item);
+    }
+
+    public void ShowNPCs()
+    {
+        ShowFiltered(CardType.NPC);
+    }
+
+    public void ShowClues()
+    {
+        ShowFiltered(CardType.Clue);
+    }
+
+    public void ShowTestimony()
+    {
+        ShowFiltered(CardType.Testimony);
+    }
+
+    public void ShowArguments()
+    {
+        ShowFiltered(CardType.Argument);
+    }
+
+    public void ShowCombinable()
+    {
+        // Clear hand first
+        foreach (var go in instantiatedCards)
+            Destroy(go);
+        instantiatedCards.Clear();
+
+        List<CardSY> cards = cardInventory.GetAllCards();
+        List<CardSY> combinableCards = new List<CardSY>();
+
+        // Compare every card with every other card
+        for (int i = 0; i < cards.Count; i++)
+        {
+            for (int j = 0; j < cards.Count; j++)
+            {
+                if (i == j) continue;
+
+                if (CombineSystem.CanCombine(cards[i], cards[j]))
+                {
+                    if (!combinableCards.Contains(cards[i]))
+                        combinableCards.Add(cards[i]);
+                }
+            }
+        }
+
+        // Build UI
+        foreach (var card in combinableCards)
+        {
+            GameObject ui = Instantiate(cardUIPrefab, handTransform);
+            CardUI cardUI = ui.GetComponent<CardUI>();
+            if (cardUI != null)
+                cardUI.Setup(card, reasoningBoardUI, this);
+
+            instantiatedCards.Add(ui);
+        }
+
+        UpdateHandVisuals();
+    }
+
+    public void ShowCombinableTestimonyCards(CardSY slot1, CardSY slot2)
+    {
+        foreach (var go in instantiatedCards)
+            Destroy(go);
+        instantiatedCards.Clear();
+
+        List<CardSY> allCards = cardInventory.GetAllCards();
+
+        List<CardSY> canCombine =
+            testimonySystem.GetCombinableWithThree(slot1, slot2, allCards);
+
+        foreach (var card in canCombine)
+        {
+            var go = Instantiate(cardUIPrefab, handTransform);
+            var ui = go.GetComponent<CardUI>();
+            ui.Setup(card, reasoningBoardUI, this);
+            instantiatedCards.Add(go);
+        }
+
+        UpdateHandVisuals();
     }
 
     public void HighlightCompatibleCards(CardSY draggedCard)

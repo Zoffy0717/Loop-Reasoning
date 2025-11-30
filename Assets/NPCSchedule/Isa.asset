@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb07d1ed3a2899e46b3aa504b791388c, type: 3}
+  m_Name: Isa
+  m_EditorClassIdentifier: 
+  npcID: 1004
+  npcPrefab: {fileID: 710063070402127317, guid: e25934e777ed31e41a152b38716d30f8, type: 3}
+  schedule:
+  - anchorIndex: 1
+    roomID: 010
+    chapter: 1
+    timeSlot: Noon
+    spawnPosition: {x: 5, y: 0}
+  - anchorIndex: 1
+    roomID: 010
+    chapter: 1
+    timeSlot: Night
+    spawnPosition: {x: 5, y: 0}
+  - anchorIndex: 1
+    roomID: 010
+    chapter: 2
+    timeSlot: Morning
+    spawnPosition: {x: 5, y: 0}
+  - anchorIndex: 1
+    roomID: 010
+    chapter: 2
+    timeSlot: Noon
+    spawnPosition: {x: 5, y: 0}
+  - anchorIndex: 0
+    roomID: 003
+    chapter: 1
+    timeSlot: Morning
+    spawnPosition: {x: 0, y: 0}
+  - anchorIndex: 0
+    roomID: 003
+    chapter: 2
+    timeSlot: Night
+    spawnPosition: {x: 0, y: 0}

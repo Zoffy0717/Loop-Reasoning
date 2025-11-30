@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03cc082e0f4575842bfc3f74628df291, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  npcName: Administor
+  dialogueLines:
+  - How could something like this happen...?
+  - I've already called the police, but they won't arrive until early the day after
+    tomorrow. I've locked the main gate for safety.
+  - For these two days, the investigation will depend on you, sir.

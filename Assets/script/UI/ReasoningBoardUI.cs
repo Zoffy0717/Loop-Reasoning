@@ -10,8 +10,11 @@ public class ReasoningBoardUI : MonoBehaviour
     public GameObject uiRoot; // The main reasoning board panel
     public HandManager handManager; 
     public CombineSystem synthesisSystem;
+    public TestimonyCombineSystem testimonyCombineSystem;
     public CardInventory playerInventory;
     public CardDetailUI cardDetailUI;
+    public GameObject testimonyBoard;
+    public GameObject normalBoard;
 
     public Image slotAImage;
     public Image slotBImage;
@@ -57,7 +60,7 @@ public class ReasoningBoardUI : MonoBehaviour
     
     private void ClearSlots()
         {
-            // Reset visuals (e.g., empty slot sprite or transparent)
+            // Reset visuals in slot
             if (slotAImage != null)
                 slotAImage.sprite = null;
 
@@ -79,6 +82,39 @@ public class ReasoningBoardUI : MonoBehaviour
             slotACard = null;
             slotBCard = null;
     }
+
+    private void ClearAllSlots(GameObject board)
+    {
+        if (board == null) return;
+
+        SlotDropArea[] slots = board.GetComponentsInChildren<SlotDropArea>();
+
+        foreach (var slot in slots)
+        {
+            if (slot.currentCard != null)
+            {
+                Destroy(slot.currentCard.gameObject);
+                slot.currentCard = null;
+            }
+        }
+    }
+
+    public void ShowNormalBoard()
+    {
+        normalBoard.SetActive(true);
+        testimonyBoard.SetActive(false);
+
+        ClearAllSlots(normalBoard);
+    }
+
+    public void ShowTestimonyBoard()
+    {
+        normalBoard.SetActive(false);
+        testimonyBoard.SetActive(true);
+
+        ClearAllSlots(testimonyBoard);
+    }
+
 
     public void OnCardDroppedIntoSlot(string slotName, CardSY card, Image targetImage)
     {
@@ -108,7 +144,44 @@ public class ReasoningBoardUI : MonoBehaviour
                     handManager.RefreshHand();
             }
         }
-            
+
+        // Testimony Board (3 slots)
+        // -------------------------
+        if (testimonyBoard.activeSelf)
+        {
+            SlotDropArea[] slots = testimonyBoard.GetComponentsInChildren<SlotDropArea>();
+
+            List<CardSY> testimonyCards = new List<CardSY>();
+
+            foreach (var s in slots)
+            {
+                if (s.currentCard != null)
+                {
+                    CardUI ui = s.currentCard.GetComponent<CardUI>();
+                    if (ui != null)
+                        testimonyCards.Add(ui.cardData);
+                }
+            }
+
+            // must have exactly 3 cards before combining
+            if (testimonyCards.Count == 3)
+            {
+                CardSY result = testimonyCombineSystem.TryCombineThree(
+                    testimonyCards[0],
+                    testimonyCards[1],
+                    testimonyCards[2]
+                );
+
+                if (result != null)
+                {
+                    playerInventory.AddCard(result);
+                    ClearAllSlots(testimonyBoard);
+
+                    if (handManager != null)
+                        handManager.RefreshHand();
+                }
+            }
+        }
     }
 }
 

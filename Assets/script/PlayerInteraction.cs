@@ -9,7 +9,6 @@ public class PlayerInteraction : MonoBehaviour
     public float interactRange = 1f;
     public LayerMask interactableMask;
     private IInteractable currentTarget;
-    public GameObject interactHintUI;
     private NPCInteractable currentHintNPC;
 
     private bool isReasoningOpen = false;
@@ -17,8 +16,7 @@ public class PlayerInteraction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (interactHintUI != null)
-            interactHintUI.SetActive(false);
+
     }
 
     // Update is called once per frame

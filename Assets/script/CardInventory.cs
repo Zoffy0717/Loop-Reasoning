@@ -46,6 +46,27 @@ public class CardInventory : MonoBehaviour
         }
     }
 
+    public List<CardSY> GetCardsByType(CardType t)
+    {
+        List<CardSY> result = new List<CardSY>();
+        foreach (var c in collectedCards)
+        {
+            if (c.type == t)
+                result.Add(c);
+        }
+        return result;
+    }
+
+    public bool HasCard(string cardID)
+    {
+        foreach (var c in collectedCards)
+        {
+            if (c.cardID == cardID)
+                return true;
+        }
+        return false;
+    }
+
     public bool HasCard(CardSY card)
     {
         return collectedCards.Contains(card);

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e034183c59f7d140b98d042edf38234, type: 3}
+  m_Name: Testimony
+  m_EditorClassIdentifier: 
+  testimonyRecipes:
+  - {fileID: 11400000, guid: 9604f8f3c7c5f2942880a43e8c9b3017, type: 2}
+  - {fileID: 11400000, guid: 286099874daabed4d9e6f0b46b57a933, type: 2}
+  - {fileID: 11400000, guid: 5e09d94d83ee5334d9ca82286e71121c, type: 2}
+  - {fileID: 11400000, guid: cadf2bb86ef0a2f4884872e4285793e4, type: 2}
+  - {fileID: 11400000, guid: 62a9c1908f73b3b4f9b10ce8afeb90fc, type: 2}
+  - {fileID: 11400000, guid: 5ad0ca1dd2fc5f240978a532a81e503c, type: 2}
+  - {fileID: 11400000, guid: f3a37afb2df28e643b11ba7b153a4c01, type: 2}
+  - {fileID: 11400000, guid: f8d5635725946f24faec7668b36e24db, type: 2}
+  - {fileID: 11400000, guid: fcf3752deeb5ea843aaa924dc55b8cb1, type: 2}
+  - {fileID: 11400000, guid: adf0ff1e8e72d9b48b9585ddbb807d59, type: 2}
+  - {fileID: 11400000, guid: e7f50c0a5a63f0546bc8189d7320e8aa, type: 2}
+  - {fileID: 11400000, guid: cfa3d116fc82a6e4fb89efd027c3850d, type: 2}
+  - {fileID: 11400000, guid: dbf5d3c8f9a737a4f92f0c87d222b61b, type: 2}
