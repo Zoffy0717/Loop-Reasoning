@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Administrator
   dialogueLines:
-  - "Ah\u2014sorry, I\u2019ve gotta get this damn furnace working again. "
-  - "Folks don\u2019t like the cold, and tonight\u2026 well, no one wants to be stuck
-    out there. "
-  - If you get turned around in this place, just holler for me.
+  - "Last night? I\u2026 I didn\u2019t mean to keep quiet. I just didn\u2019t want
+    any trouble."
+  - "The Captain\u2014he had a temper, you know that. I was scared, is all."

@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95eead0a4a1af347a7ebf8dfb594e8c, type: 3}
   m_Name: Vega Dialogue
   m_EditorClassIdentifier: 
-  scheduledDialogues: []
+  scheduledDialogues:
+  - day: 1
+    time: 0
+    dialogue: {fileID: 11400000, guid: dad66bfe3864f3641bc4a906d4682394, type: 2}
+  - day: 1
+    time: 1
+    dialogue: {fileID: 11400000, guid: 3863395b911c20d44b341acabd0b9ef9, type: 2}
+  - day: 1
+    time: 2
+    dialogue: {fileID: 11400000, guid: 3863395b911c20d44b341acabd0b9ef9, type: 2}
+  - day: 2
+    time: 0
+    dialogue: {fileID: 11400000, guid: 3863395b911c20d44b341acabd0b9ef9, type: 2}
+  - day: 2
+    time: 1
+    dialogue: {fileID: 11400000, guid: 3863395b911c20d44b341acabd0b9ef9, type: 2}
+  - day: 2
+    time: 2
+    dialogue: {fileID: 11400000, guid: 3863395b911c20d44b341acabd0b9ef9, type: 2}

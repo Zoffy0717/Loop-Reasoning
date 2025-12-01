@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095ecebb6c7993b4cb1d4bebe8cc41ae, type: 3}
+  m_Name: truth serum
+  m_EditorClassIdentifier: 
+  itemID: 3003
+  itemPrefab: {fileID: 6526655520141676275, guid: 8d4dfa1791f02a6408067540877c6a0d, type: 3}
+  schedule:
+  - roomID: 004
+    day: 1
+    period: 0
+    anchorIndex: 0
+  - roomID: 004
+    day: 1
+    period: 1
+    anchorIndex: 0
+  - roomID: 004
+    day: 1
+    period: 2
+    anchorIndex: 0
+  - roomID: 004
+    day: 2
+    period: 0
+    anchorIndex: 0
+  - roomID: 004
+    day: 2
+    period: 1
+    anchorIndex: 0
+  - roomID: 004
+    day: 2
+    period: 2
+    anchorIndex: 0
+  pickedUp: 0

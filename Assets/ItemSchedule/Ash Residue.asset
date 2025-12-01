@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095ecebb6c7993b4cb1d4bebe8cc41ae, type: 3}
+  m_Name: Ash Residue
+  m_EditorClassIdentifier: 
+  itemID: 3013
+  itemPrefab: {fileID: 7886424646774961978, guid: 58c1f5931b5ac544f912506f6c84fcad, type: 3}
+  schedule:
+  - roomID: 002
+    day: 1
+    period: 0
+    anchorIndex: 2
+  - roomID: 002
+    day: 1
+    period: 1
+    anchorIndex: 2
+  pickedUp: 0

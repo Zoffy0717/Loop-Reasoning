@@ -11,6 +11,8 @@ public class ExplorationNode : MonoBehaviour, IInteractable
 
     public bool destroyAfter;
 
+    public string scheduledItemID;
+
     public void Explore(PlayerInteraction player)
     {
         if (dropCards == null || dropCards.Length == 0 || cardDroped == true) return;
@@ -22,11 +24,15 @@ public class ExplorationNode : MonoBehaviour, IInteractable
 
         UI_CardPopup.Instance.ShowCards(dropCards);
         cardDroped = true;
+
+        if (!string.IsNullOrEmpty(scheduledItemID))
+            ItemSpawnManager.Instance.MarkItemPicked(scheduledItemID);
+
         if (destroyAfter)
         {
             Collider2D myCol = GetComponent<Collider2D>();
             myCol.enabled = false;
-            gameObject.SetActive(false); // optional: only explore once
+            gameObject.SetActive(false); 
         }
     }
 
