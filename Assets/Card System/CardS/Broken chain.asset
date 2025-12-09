@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3016
   displayName: Broken chain
   type: 1
-  artwork: {fileID: 21300000, guid: a5184b87bce15ee4e9cefa51cd87194b, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: The snapped metal link holds tiny flecks of dried blood.
   keywords: []

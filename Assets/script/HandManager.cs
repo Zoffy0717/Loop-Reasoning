@@ -72,7 +72,7 @@ public class HandManager : MonoBehaviour
             GameObject go = Instantiate(cardUIPrefab, handTransform);
             CardUI cardUI = go.GetComponent<CardUI>();
             if (cardUI != null)
-                cardUI.Setup(cardData, reasoningBoardUI, this); // ✅ pass reference
+                cardUI.Setup(cardData, reasoningBoardUI, this);
                 activeCardUIs.Add(cardUI);
 
             instantiatedCards.Add(go);
@@ -121,7 +121,7 @@ public class HandManager : MonoBehaviour
             GameObject ui = Instantiate(cardUIPrefab, handTransform);
             CardUI cardUI = ui.GetComponent<CardUI>();
             if (cardUI != null)
-                cardUI.Setup(card, reasoningBoardUI, this); // <-- pass 'this' here
+                cardUI.Setup(card, reasoningBoardUI, this);
             instantiatedCards.Add(ui);
         }
 

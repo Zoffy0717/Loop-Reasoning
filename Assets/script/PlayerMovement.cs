@@ -8,21 +8,28 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movement;
+    private Animator animator;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right
-        //movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down
 
+        animator.SetFloat("Speed", Mathf.Abs(movement.x));
     }
 
     void FixedUpdate()
     {
+        if (movement.x > 0)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        else if (movement.x < 0)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }

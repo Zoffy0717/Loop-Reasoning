@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 4004
   displayName: Counterfeit Liquor Label
   type: 3
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: The label is crudely printed, clearly not from a legitimate distillery.
   keywords: []

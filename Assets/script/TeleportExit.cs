@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TeleportExit : MonoBehaviour, IInteractable
 {
-    public Transform destinationPoint; // entrance door position
+    public Transform destinationPoint; // Where to send the player (entrance)
     private GameObject player;
+    public string roomID;
 
     private void Start()
     {
@@ -17,10 +18,17 @@ public class TeleportExit : MonoBehaviour, IInteractable
         if (player != null && destinationPoint != null)
         {
             player.transform.position = destinationPoint.position;
-        }
-        else
-        {
-            Debug.LogWarning("⚠️ TeleportExit: Missing player or destination!");
+
+            var gsm = GameStateManager.Instance;
+
+            if (gsm.HasPaidForRoom(roomID))
+            {
+                return;
+            }
+
+            gsm.AdvanceTimeSlot();
+            gsm.MarkRoomPaid(roomID);
         }
     }
+
 }

@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3012
   displayName: Ledger
   type: 1
-  artwork: {fileID: 21300000, guid: f5c6b15e16376cb4eb652f08bea8b342, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: Contains itemized records, possibly indicating illicit transactions.
   keywords: []

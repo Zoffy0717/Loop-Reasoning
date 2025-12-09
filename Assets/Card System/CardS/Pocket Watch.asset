@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3006
   displayName: Pocket Watch
   type: 1
-  artwork: {fileID: 21300000, guid: cdeca8a4c29381948abb364acc8292f2, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: A solid metal watch, its time frozen at a suspicious hour.
   keywords: []

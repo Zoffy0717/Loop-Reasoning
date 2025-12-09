@@ -15,6 +15,6 @@ MonoBehaviour:
   npcName: Arthur
   dialogueLines:
   - Good evening, detective.
-  - Welcome to my mansion.
-  - The room is ready, I would love to show you around but I have a meeting in 5
-    minutes.
+  - Welcome to my mansion. The room is ready for you.
+  - I would love to show you around but it is getting late. You should go to your
+    room now.

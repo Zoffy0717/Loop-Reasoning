@@ -13,8 +13,9 @@ public class NPCSchedule : ScriptableObject
         public int chapter;           // which chapter or story stage
         public string timeSlot;       // "Morning", "Afternoon", "Night"
         public Vector2 spawnPosition; // where to spawn (inside the room)
+        
     }
-
+    public bool isDead = false;
     public string npcID;
     public GameObject npcPrefab;
 

@@ -20,17 +20,17 @@ public class NPCInteractable : MonoBehaviour, IInteractable
         // -------------------------
         if (router != null)
         {
-            // Step A: If dialogue is NOT active, start it
+            //If dialogue is NOT active, start it
             if (!DialogueUI.Instance.IsActive())
             {
                 router.Interact(player); // starts the router-based dialogue
                 return;
             }
 
-            // Step B: Advance router-based dialogue
+            // Advance router-based dialogue
             bool stillTalking = DialogueUI.Instance.AdvanceDialogue();
 
-            // Step C: When dialogue ends → drop card ONCE
+            //When dialogue ends → drop card ONCE
             if (!stillTalking && !cardDroped)
             {
                 player.cardInventory.AddCard(npcCard);
@@ -41,9 +41,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable
             return;
         }
 
-        // -------------------------
-        // 2. OLD (non-router) NPC logic
-        // -------------------------
+
         if (!DialogueUI.Instance.IsActive())
         {
             DialogueUI.Instance.StartDialogue(dialogueData);

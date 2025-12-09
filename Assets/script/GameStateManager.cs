@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 
 public enum DayType
 {
@@ -28,6 +30,7 @@ public class GameStateManager : MonoBehaviour
     [Header("Settings")]
     public int maxAP = 0;
     public int actionPointsRemaining = 0;
+    public GameObject restUI;
 
     [Header("UI")]
     public ScreenFader screenFader;
@@ -38,8 +41,9 @@ public class GameStateManager : MonoBehaviour
     public event Action OnAPChanged;
 
     private bool day1Started = false;
+    
     //track room that entered
-    private Dictionary<string, TimePeriod> roomVisitRecord = new Dictionary<string, TimePeriod>();
+    private Dictionary<string, DayType> roomVisitRecord = new Dictionary<string, DayType>();
 
     private void Awake()
     {
@@ -60,26 +64,43 @@ public class GameStateManager : MonoBehaviour
             actionPointsRemaining = maxAP;
     }
 
+    void Update()
+    {
+        if(currentDay != DayType.Day0)
+        {
+            if(currentPeriod == TimePeriod.Night & actionPointsRemaining == 0)
+            {
+                restUI.SetActive(true);
+            }
+        }
+        
+    }
+
     // AP Consumption
     public bool TryConsumeAP(int cost)
     {
-        // AP inactive → always allow free entry
         if (!IsAPActive())
             return true;
 
         if (actionPointsRemaining < cost)
         {
-            Debug.Log("❌ Not enough AP.");
             return false;
         }
 
         actionPointsRemaining -= cost;
-
+        if (actionPointsRemaining < 0) actionPointsRemaining = 0;
         OnAPChanged?.Invoke();
 
-        AdvanceTimeSlot();
-
         return true;
+    }
+
+    public void ConsumeAP_NoTimeAdvance(int cost)
+    {
+        actionPointsRemaining -= cost;
+        if (actionPointsRemaining < 0)
+            actionPointsRemaining = 0;
+
+        OnAPChanged?.Invoke();
     }
 
     public void StartDay1()
@@ -91,8 +112,27 @@ public class GameStateManager : MonoBehaviour
 
         actionPointsRemaining = maxAP;
 
-        Debug.Log("🌅 DAY 1 BEGINS — AP System Activated");
+        OnDayAdvanced?.Invoke();
+        OnAPChanged?.Invoke();
+    }
 
+    public void StartNextDay()
+    {
+        if (currentDay == DayType.Day1)
+            currentDay = DayType.Day2;
+        else
+        {
+            Debug.Log("🏁 All Days Complete");
+            SceneManager.LoadScene(2);
+            return;
+        }
+
+        currentPeriod = TimePeriod.Morning;
+        actionPointsRemaining = maxAP;
+        roomVisitRecord.Clear();
+
+        Debug.Log("📅 New Day Started → " + currentDay);
+        restUI.SetActive(false);
         OnDayAdvanced?.Invoke();
         OnAPChanged?.Invoke();
     }
@@ -125,102 +165,39 @@ public class GameStateManager : MonoBehaviour
             yield return screenFader.FadeIn();
     }
 
-    // Day progression
-    private void AdvanceDay()
+    private string CurrentTimeKey()
     {
-        if (currentDay == DayType.Day1)
-        {
-            currentDay = DayType.Day2;
-            currentPeriod = TimePeriod.Morning;
-
-            actionPointsRemaining = maxAP;
-
-            Debug.Log("📅 Advanced to Day 2");
-            OnDayAdvanced?.Invoke();
-            OnAPChanged?.Invoke();
-        }
-        else
-        {
-            Debug.Log("⭐ GAME END: Days Completed");
-            // TODO: end game
-        }
-    }
-
-    public void StartNextDay()
-    {
-        if (currentDay == DayType.Day1)
-            currentDay = DayType.Day2;
-        else
-        {
-            Debug.Log("🏁 All Days Complete");
-            // End game
-            return;
-        }
-
-        currentPeriod = TimePeriod.Morning;
-        actionPointsRemaining = maxAP;
-
-        Debug.Log("📅 New Day Started → " + currentDay);
-
-        OnDayAdvanced?.Invoke();
-        OnAPChanged?.Invoke();
-    }
-
-    // Helpers
-    public bool IsFreeRoom()
-    {
-        return (currentDay == DayType.Day1 &&
-                currentPeriod == TimePeriod.Morning);
-    }
-
-    public string GetCurrentStateString()
-    {
-        return $"{currentDay} - {currentPeriod} - AP:{actionPointsRemaining}";
-    }
-    public bool HasEnoughActionPoints(int cost)
-    {
-        return actionPointsRemaining >= cost;
-    }
-
-    public void UseActionPoints(int cost)
-    {
-        TryConsumeAP(cost); // reuse existing logic
-    }
-
-    // Optional event hook (room-based spawning can use this)
-    public void NotifyRoomEntered(string roomID)
-    {
-        Debug.Log("📍 Room entered: " + roomID);
-        // Later you can add:
-        //NPCScheduleManager.Instance.UpdateNPCPositions(roomID);
-        // ItemSpawnManager.Instance.RefreshRoom(roomID);
+        return $"{currentDay}_{currentPeriod}";
     }
 
     public bool HasPaidForRoom(string roomID)
     {
-        if (roomVisitRecord.ContainsKey(roomID))
-        {
-            return roomVisitRecord[roomID] == currentPeriod;
-        }
-        return false;
+        return roomVisitRecord.ContainsKey(roomID) &&
+        roomVisitRecord[roomID] == currentDay;
     }
 
     public void MarkRoomPaid(string roomID)
     {
         if (roomVisitRecord.ContainsKey(roomID))
-            roomVisitRecord[roomID] = currentPeriod;
+            roomVisitRecord[roomID] = currentDay;
         else
-            roomVisitRecord.Add(roomID, currentPeriod);
+            roomVisitRecord.Add(roomID, currentDay);
     }
 
-    // Property wrapper so RoomEntrance can read AP
-    public int ActionPointsRemaining
+    private void ClearAllRoomPayments()
     {
-        get { return actionPointsRemaining; }
+        roomVisitRecord.Clear();
     }
 
     public bool IsAPActive()
     {
         return currentDay != DayType.Day0;
+    }
+
+    public int ActionPointsRemaining => actionPointsRemaining;
+
+    public bool HasEnoughActionPoints(int cost)
+    {
+        return actionPointsRemaining >= cost;
     }
 }

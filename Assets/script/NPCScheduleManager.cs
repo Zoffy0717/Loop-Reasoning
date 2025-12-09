@@ -99,7 +99,10 @@ public class NPCScheduleManager : MonoBehaviour
                     Vector3 pos = anchor.position;
 
                     Quaternion npcRotation = Quaternion.Euler(0, 180f, 0);
-
+                    if (schedule.isDead)
+                    {
+                        npcRotation = Quaternion.Euler(0, 180f, 90f);
+                    }
                     GameObject npc = Instantiate(
                         schedule.npcPrefab,
                         pos,

@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 1001
   displayName: Hall
   type: 0
-  artwork: {fileID: 21300000, guid: 19304a46871ef994f8c53249218af0b1, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: A warm yet stifling common space; every guest must pass through it.
   keywords: []

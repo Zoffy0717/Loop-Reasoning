@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3011
   displayName: Film Negative
   type: 1
-  artwork: {fileID: 21300000, guid: 5a15ea84d7f9eb14bb4a5d9f1b528f97, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: A photograph negative with chemical traces that match suspicious substances.
   keywords: []

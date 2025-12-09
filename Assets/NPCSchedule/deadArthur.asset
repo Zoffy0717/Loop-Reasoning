@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb07d1ed3a2899e46b3aa504b791388c, type: 3}
   m_Name: deadArthur
   m_EditorClassIdentifier: 
+  isDead: 1
   npcID: 5000
   npcPrefab: {fileID: 7797862388382983975, guid: c949a82f0d80cc543ae6a8d94c854226, type: 3}
   schedule:

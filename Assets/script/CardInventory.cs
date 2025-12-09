@@ -40,10 +40,6 @@ public class CardInventory : MonoBehaviour
         else{
             boardHintUI.SetActive(false);
         }
-        if (collectedCards.Count >= 7)
-        {
-            //StartCoroutine(EndGame());
-        }
     }
 
     public List<CardSY> GetCardsByType(CardType t)

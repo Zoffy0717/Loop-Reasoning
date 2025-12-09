@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3017
   displayName: Shards
   type: 1
-  artwork: {fileID: 21300000, guid: 473b0a1945e5ed644a79b9b753256e93, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: A scrap likely originating from clothing or a glove.
   keywords: []

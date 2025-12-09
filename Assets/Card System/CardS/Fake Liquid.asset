@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 3007
   displayName: Fake Liquid
   type: 1
-  artwork: {fileID: 21300000, guid: a3d37936e2cc8954e871046e41eb1216, type: 3}
+  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
   description: The label is poorly printed, and the contents have a sharp, chemical
     odor.
   keywords: []
