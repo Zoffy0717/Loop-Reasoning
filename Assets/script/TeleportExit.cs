@@ -17,7 +17,7 @@ public class TeleportExit : MonoBehaviour, IInteractable
     {
         if (player != null && destinationPoint != null)
         {
-            player.transform.position = destinationPoint.position;
+            StartCoroutine(TeleportWithFade());
 
             var gsm = GameStateManager.Instance;
 
@@ -29,6 +29,19 @@ public class TeleportExit : MonoBehaviour, IInteractable
             gsm.AdvanceTimeSlot();
             gsm.MarkRoomPaid(roomID);
         }
+    }
+
+    private IEnumerator TeleportWithFade()
+    {
+        if (ScreenFader.Instance != null)
+            yield return ScreenFader.Instance.FadeOut();
+
+        player.transform.position = destinationPoint.position;
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (ScreenFader.Instance != null)
+            yield return ScreenFader.Instance.FadeIn();
     }
 
 }

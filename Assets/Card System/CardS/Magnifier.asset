@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3002
   displayName: Magnifying glass
   type: 1
-  artwork: {fileID: 21300000, guid: 65d38fdb2e1ca054a9c388d499ebb9e6, type: 3}
+  artwork: {fileID: 21300000, guid: 782ed76e88642b942bc21a29343e7dd7, type: 3}
   description: A portable tool used to inspect fine traces and subtle markings.
   keywords: []

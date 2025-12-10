@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3015
   displayName: Cigarette Ash
   type: 1
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 096bf3cb1ee2e1741bf4063cfedad59f, type: 3}
   description: A brand of cigarette unfamiliar among the guests.
   keywords: []

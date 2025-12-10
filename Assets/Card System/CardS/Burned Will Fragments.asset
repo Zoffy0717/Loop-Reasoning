@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 4013
   displayName: Burned Will Fragments
   type: 3
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 4318df66132f92b42a65b1ff3fc7e6a6, type: 3}
   description: "Burned paper scraps faintly reveal the word \u201Cdonation.\u201D"
   keywords: []

@@ -187,7 +187,7 @@ RectTransform:
   m_GameObject: {fileID: 408998119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0917, y: 1.0833, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2071193426}
@@ -729,7 +729,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introPanel: {fileID: 408998119}
-  introDuration: 5
+  introText: {fileID: 2071193427}
+  textsPerSecond:
+  - Rain taps softly against the window, and the wooden floor of your apartment creaks
+    beneath your slow, familiar steps.
+  - "Tonight should have been like any other night\u2014"
+  - a cup of warm tea, a few pages of an old book, and the gentle drift into shallow
+    sleep beneath a dim lamp.
+  - 'But then you found the postcard.A serene valley stretches across the glossy
+    surface: snow-covered peaks, a lake wrapped in dark pines, and a mountain lodge
+    standing quietly under a plume of chimney smoke.'
+  - "You recognized it instantly\u2014The Lodge.Tucked beside it was a torn piece
+    of a local newspaper, the edges wrinkled and damp from the rain:\u201CGrant Lodge
+    to be auctioned later this month. Rumors persist regarding the unresolved death
+    of its owner."
+  - "Your hand pauses, fingertips brushing the rough paper.How long has it been?Ten
+    years? Twenty?Time has blunted many memories, softened others, and buried some
+    entirely\u2014but not that winter night.Not the shouting, the fear,and the truths
+    that were never spoken aloud."
+  - "You sit by the window.Outside, night presses against the glass, reflecting your
+    aging silhouette back at you\u2014faint, ghostlike.Something deep within you
+    stirs, a forgotten ache:the lingering weight of a case you never truly closed."
+  - "You close your eyes.The wind howls.The lodge returns.Footsteps.A broken glass.A
+    stopped watch.A body in the snow\u2026\u2026"
 --- !u!1 &1342625809
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,8 +920,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.7, y: -0.79}
-  m_SizeDelta: {x: 348.4, y: 50}
+  m_AnchoredPosition: {x: -0.2198, y: -177}
+  m_SizeDelta: {x: 1425.5142, y: 830.9957}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2071193427
 MonoBehaviour:
@@ -984,7 +1006,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 83.9686, z: 0, w: 190.07901}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

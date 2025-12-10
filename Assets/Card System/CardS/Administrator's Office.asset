@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 1007
   displayName: Administrator's
   type: 0
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: e00d7bbbc88eb964ea7b4184b7760208, type: 3}
   description: A cramped, chilly room holding both the caretaker
   keywords: []

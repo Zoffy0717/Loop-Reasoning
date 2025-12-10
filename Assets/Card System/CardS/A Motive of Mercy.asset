@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 6012
   displayName: A Motive of Mercy
   type: 5
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 0a2a5471c38d44a4585b34aeef5df332, type: 3}
   description: "The doctor\u2019s private writings hint that she saw \u201Crelease\u201D
     as an act of compassion."
   keywords: []

@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3013
   displayName: Ash Residue
   type: 1
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 2cf2bef613729d2479275748f544f67c, type: 3}
   description: A scorched page with faint remnants of what appears to be a will.
   keywords: []

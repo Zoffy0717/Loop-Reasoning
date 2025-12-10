@@ -13,15 +13,21 @@ public class AccusationManager : MonoBehaviour
 
     [Header("UI")]
     public GameObject gameOverPanel;
+    public GameObject board;
+    public GameObject restartPanel;
 
     private AccusationCharacterButton selectedSuspect;
 
     private CardInventory cardInventory;
 
+    private float introDuration = 2f;
+
     void Start()
     {
         // Find CardInventory across scenes (persistent manager)
         cardInventory = FindObjectOfType<CardInventory>();
+
+        board.SetActive(true);
 
         foreach (var s in suspects)
         {
@@ -61,19 +67,23 @@ public class AccusationManager : MonoBehaviour
         else
         {
             Debug.Log("❌ Wrong accusation. Restarting Day 1.");
-            RestartGame();
+            StartCoroutine(RestartGame());
         }
     }
 
     private void ShowGameOver()
     {
+        board.SetActive(false);
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
     }
 
-    private void RestartGame()
+    private IEnumerator RestartGame()
     {
-        GameStateManager.Instance.StartDay1();
+        restartPanel.SetActive(true);
+        yield return new WaitForSeconds(introDuration);
         SceneManager.LoadScene(1);
+        GameStateManager.Instance.StartDay1();
+        
     }
 }

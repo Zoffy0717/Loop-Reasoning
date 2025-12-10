@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3010
   displayName: Wine bottle
   type: 1
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 1d768d030376a5b40b99b61429c8531c, type: 3}
   description: The inner surface carries a harsh chemical scent.
   keywords: []

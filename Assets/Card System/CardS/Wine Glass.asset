@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3005
   displayName: Wine Glass
   type: 1
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 1839aef7e7c3efa4f8eb1381137ffbcb, type: 3}
   description: A single glass with faint residue at the bottom.
   keywords: []

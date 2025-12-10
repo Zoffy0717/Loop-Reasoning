@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 3018
   displayName: Photo Frame
   type: 1
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 91e33b9913b4e9d499fd5bcd18167894, type: 3}
   description: "The frame\u2019s corners are damaged, and the photograph inside seems
     hastily removed."
   keywords: []

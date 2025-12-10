@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCards:
-  - {fileID: 11400000, guid: 79dd52de58cf8f04c96c5e39a5dee318, type: 2}
+  - {fileID: 11400000, guid: edb22274365ff594eb0695e88b941df4, type: 2}
   autoDropOnEnter: 0
   destroyAfter: 1
+  scheduledItemID: 
 --- !u!58 &3031561789886234165
 CircleCollider2D:
   m_ObjectHideFlags: 0

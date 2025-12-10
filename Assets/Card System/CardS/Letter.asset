@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 3009
   displayName: Letter
   type: 1
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 382b301308aab4942aeca9786d1736ff, type: 3}
   description: "The writing hints at someone\u2019s plan to leave\u2014or escape."
   keywords: []

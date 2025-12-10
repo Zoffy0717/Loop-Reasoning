@@ -10,7 +10,6 @@ public class UI_CardPopup : MonoBehaviour
     public GameObject popupRoot;
 
     public Image cardArtwork;
-    public TextMeshProUGUI cardName;
     public TextMeshProUGUI hintText;
 
     private bool isOpen = false;
@@ -51,7 +50,6 @@ public class UI_CardPopup : MonoBehaviour
     private void ShowCard(CardSY card)
     {
         cardArtwork.sprite = card.artwork;
-        cardName.text = card.displayName;
 
         hintText.text = "Press C to continue";
     }

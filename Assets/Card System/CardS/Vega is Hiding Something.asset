@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 6009
   displayName: Vega is Hiding Something
   type: 5
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 0a2a5471c38d44a4585b34aeef5df332, type: 3}
   description: The empty vial and concealed items reveal that Vega is not being fully
     honest.
   keywords: []

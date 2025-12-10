@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 4015
   displayName: Cigar Ash
   type: 3
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 4318df66132f92b42a65b1ff3fc7e6a6, type: 3}
   description: "The cigarette ash differs from the Captain\u2019s usual imported
     brand."
   keywords: []

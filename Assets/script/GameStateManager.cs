@@ -68,7 +68,7 @@ public class GameStateManager : MonoBehaviour
     {
         if(currentDay != DayType.Day0)
         {
-            if(currentPeriod == TimePeriod.Night & actionPointsRemaining == 0)
+            if(currentPeriod == TimePeriod.Night & actionPointsRemaining == 0 & restUI != null)
             {
                 restUI.SetActive(true);
             }
@@ -105,7 +105,7 @@ public class GameStateManager : MonoBehaviour
 
     public void StartDay1()
     {
-        if (day1Started) return;
+        //if (day1Started) return;
         day1Started = true;
         currentDay = DayType.Day1;
         currentPeriod = TimePeriod.Morning;

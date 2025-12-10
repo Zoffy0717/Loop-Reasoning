@@ -15,6 +15,6 @@ MonoBehaviour:
   cardID: 1012
   displayName: Corridor
   type: 0
-  artwork: {fileID: 21300000, guid: eb64af776d8ea964aacce25cd19edcd1, type: 3}
+  artwork: {fileID: 21300000, guid: 4cc3a16fa4fd438498f46e914ee26e7c, type: 3}
   description: A narrow passage linking the rooms
   keywords: []
