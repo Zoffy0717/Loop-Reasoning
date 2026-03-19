@@ -7,7 +7,7 @@ public class AccusationCharacterButton : MonoBehaviour
 {
     [Header("Character Info")]
     public string suspectID;              // "Richard", "Anna", etc.
-    public string requiredEvidenceCardID; // card needed to accuse
+    public List<string> requiredEvidenceCardIDs; // card needed to accuse
     public Image portraitImage;
     public Button button;
 
@@ -17,20 +17,14 @@ public class AccusationCharacterButton : MonoBehaviour
     private Color disabledColor = Color.gray;
     private Color selectedColor = new Color(1f, 0.8f, 0.8f);
 
-    public void Init(AccusationManager m, bool hasEvidence)
+    public void Init(AccusationManager m, CardInventory inventory)
     {
         manager = m;
 
-        if (!hasEvidence)
-        {
-            portraitImage.color = disabledColor;
-            button.interactable = false;
-        }
-        else
-        {
-            portraitImage.color = normalColor;
-            button.interactable = true;
-        }
+        bool hasEvidence = inventory.HasAnyCard(requiredEvidenceCardIDs);
+
+        portraitImage.color = hasEvidence ? normalColor : disabledColor;
+        button.interactable = hasEvidence;
     }
 
     public void OnClick()

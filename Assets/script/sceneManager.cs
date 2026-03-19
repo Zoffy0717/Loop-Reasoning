@@ -9,6 +9,8 @@ public class sceneManager : MonoBehaviour
 
     public GameObject introPanel; // assign the black panel
     public TextMeshProUGUI introText;
+    public AudioClip transition;
+    private AudioSource musicSource;
 
     public string[] textsPerSecond = new string[]
     {
@@ -24,7 +26,7 @@ public class sceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        musicSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,10 +46,13 @@ public class sceneManager : MonoBehaviour
         // Show black screen + text
         introPanel.SetActive(true);
 
+        musicSource.clip = transition;
+        musicSource.Play();
+
         for (int i = 0; i < textsPerSecond.Length; i++)
         {
             introText.text = textsPerSecond[i];
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(8f);
         }
 
         // Load gameplay scene

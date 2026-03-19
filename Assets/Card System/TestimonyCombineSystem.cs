@@ -106,4 +106,89 @@ public class TestimonyCombineSystem : ScriptableObject
 
         return result;
     }
+
+    public bool IsTestimonyIngredient(CardSY card)
+    {
+        if (card == null) return false;
+
+        foreach (var recipe in testimonyRecipes)
+        {
+            // testimony recipes are 3-card recipes
+            if (recipe.inputCardIDs.Length != 3)
+                continue;
+
+            if (recipe.inputCardIDs.Contains(card.cardID))
+                return true;
+        }
+
+        return false;
+    }
+    // checks dragged card and candidate and any third card that can synthesis
+    public bool ExistsThreeCardRecipe(CardSY a, CardSY b, List<CardSY> allCards)
+    {
+        foreach (var c in allCards)
+        {
+            if (c == a || c == b)
+                continue;
+
+            if (CanCombineThree(a, b, c))
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool CanStillFormTestimony(CardSY card, List<CardSY> allCards, CardInventory inventory)
+    {
+        foreach (var recipe in testimonyRecipes)
+        {
+            if (recipe.inputCardIDs.Length != 3)
+                continue;
+
+            if (!recipe.inputCardIDs.Contains(card.cardID))
+                continue;
+
+            bool alreadyOwned = false;
+
+            foreach (var c in allCards)
+            {
+                if (c.cardID == recipe.resultCard.cardID)
+                {
+                    alreadyOwned = true;
+                    break;
+                }
+            }
+
+            if (alreadyOwned)
+                continue;
+
+            // Check if all ingredients exist
+            bool hasAll = true;
+
+            foreach (var id in recipe.inputCardIDs)
+            {
+                bool found = false;
+
+                foreach (var c in allCards)
+                {
+                    if (c.cardID == id)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    hasAll = false;
+                    break;
+                }
+            }
+
+            if (hasAll)
+                return true;
+        }
+
+        return false;
+    }
 }

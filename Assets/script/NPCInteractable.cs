@@ -8,7 +8,6 @@ public class NPCInteractable : MonoBehaviour, IInteractable
     public DialogueData dialogueData;
     public CardSY npcCard;
     public GameObject interactHintUI;
-    private bool cardDroped = false;
 
 
     public void Interact(PlayerInteraction player)
@@ -31,32 +30,14 @@ public class NPCInteractable : MonoBehaviour, IInteractable
             bool stillTalking = DialogueUI.Instance.AdvanceDialogue();
 
             //When dialogue ends → drop card ONCE
-            if (!stillTalking && !cardDroped)
+            if (!stillTalking && !player.cardInventory.HasCard(npcCard))
             {
                 player.cardInventory.AddCard(npcCard);
                 UI_CardPopup.Instance.ShowCards(new[] { npcCard });
-                cardDroped = true;
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.cardAcquire);
             }
 
             return;
-        }
-
-
-        if (!DialogueUI.Instance.IsActive())
-        {
-            DialogueUI.Instance.StartDialogue(dialogueData);
-            return;
-        }
-        else
-        {
-            bool stillTalking = DialogueUI.Instance.AdvanceDialogue();
-
-            if (!stillTalking && !cardDroped)
-            {
-                player.cardInventory.AddCard(npcCard);
-                UI_CardPopup.Instance.ShowCards(new[] { npcCard });
-                cardDroped = true;
-            }
         }
     }
 

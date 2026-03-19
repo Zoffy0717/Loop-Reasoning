@@ -7,7 +7,9 @@ using TMPro;
 public class CardInventory : MonoBehaviour
 {
     public List<CardSY> collectedCards = new List<CardSY>();
-    
+
+    private List<CardSY> newlyAddedCards = new List<CardSY>();
+
     public delegate void CardAddedHandler(CardSY card);
     
     public event CardAddedHandler OnCardAdded;
@@ -30,15 +32,20 @@ public class CardInventory : MonoBehaviour
         }
 
         collectedCards.Add(newCard);
+        newlyAddedCards.Add(newCard);
 
         OnCardAdded?.Invoke(newCard);
-        
-        if (collectedCards.Count == 2)
+
+        if (boardHintUI != null)
         {
-            boardHintUI.SetActive(true);
-        }
-        else{
-            boardHintUI.SetActive(false);
+            if (collectedCards.Count == 2)
+            {
+                boardHintUI.SetActive(true);
+            }
+            else
+            {
+                boardHintUI.SetActive(false);
+            }
         }
     }
 
@@ -88,4 +95,25 @@ public class CardInventory : MonoBehaviour
         collectedCards.Remove(card);
     }
 
+    public List<CardSY> ConsumeNewCards()
+    {
+        List<CardSY> result = new List<CardSY>(newlyAddedCards);
+        newlyAddedCards.Clear();
+        return result;
+    }
+
+    public bool HasNewCards()
+    {
+        return newlyAddedCards.Count > 0;
+    }
+
+    public bool HasAnyCard(List<string> cardIDs)
+    {
+        foreach (var id in cardIDs)
+        {
+            if (HasCard(id))
+                return true;
+        }
+        return false;
+    }
 }

@@ -45,4 +45,28 @@ public class CombineSystem : ScriptableObject
         }
         return false;
     }
+
+    public CardSY GetResult(CardSY cardA, CardSY cardB)
+    {
+        if (cardA == null || cardB == null) return null;
+
+        var inputs = new[] { cardA.cardID, cardB.cardID }
+            .OrderBy(x => x)
+            .ToArray();
+
+        foreach (var recipe in recipes)
+        {
+            var required = recipe.inputCardIDs
+                .OrderBy(x => x)
+                .ToArray();
+
+            if (inputs.SequenceEqual(required))
+            {
+                return recipe.resultCard;
+            }
+        }
+
+        return null;
+    }
+
 }

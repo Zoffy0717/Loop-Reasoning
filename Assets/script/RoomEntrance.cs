@@ -18,13 +18,21 @@ public class RoomEntrance : MonoBehaviour, IInteractable
     public string roomDisplayName;   // What shows in the UI
     public GameObject hintUI;        // same idea as NPC hint
 
+    public CameraFollow cameraFollow;
+    public Collider2D roomBounds;
+    private GameStateManager gsm;
+
     [Header("Room Card")]
     public CardSY roomCard;     
     private bool hasDroppedCard = false;
 
+    public AudioClip roomMusic;
+    public bool useOverrideMusic = false;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        gsm = GameStateManager.Instance;
     }
 
     public void Interact(PlayerInteraction playerInteraction)
@@ -39,7 +47,10 @@ public class RoomEntrance : MonoBehaviour, IInteractable
         if (gsm.currentDay == DayType.Day0)
         {
             if (triggersStartOfDay1)
-                gsm.StartDay1();
+            {
+                StartCoroutine(DayFade());
+            }
+                
 
             if (enterCost == 0)
             {
@@ -55,7 +66,7 @@ public class RoomEntrance : MonoBehaviour, IInteractable
 
         if (isBedroomEntrance && gsm.actionPointsRemaining == 0 && gsm.currentPeriod == TimePeriod.Night)
         {
-            gsm.StartNextDay();
+            StartCoroutine(DayFade());
             return;
         }
 
@@ -99,12 +110,55 @@ public class RoomEntrance : MonoBehaviour, IInteractable
 
         player.transform.position = destinationPoint.position;
 
+        cameraFollow.SetRoomBounds(roomBounds);
+        if (roomMusic != null)
+        {
+            if (useOverrideMusic)
+            {
+                AudioManager.Instance.PlayOverrideMusic(roomMusic);
+            }
+            else
+            {
+                AudioManager.Instance.PlayMusic(roomMusic);
+            }
+        }
+        else
+        {
+            // If no room music, stop override (go back to normal)
+            AudioManager.Instance.StopOverrideMusic();
+        }
         yield return new WaitForSeconds(0.1f);
+
+        
 
         if (ScreenFader.Instance != null)
             yield return ScreenFader.Instance.FadeIn();
 
         TryDropRoomCard();
+    }
+
+    private IEnumerator DayFade()
+    {
+        if (gsm.currentDay == DayType.Day2)
+        {
+            gsm.StartNextDay();
+        }
+
+        if (ScreenFader.Instance != null)
+            yield return ScreenFader.Instance.FadeOut();
+
+        if (gsm.currentDay == DayType.Day0)
+        {
+            gsm.StartDay1();
+        }
+        else
+        {
+            gsm.StartNextDay();
+        }
+            yield return new WaitForSeconds(0.1f);
+
+        if (ScreenFader.Instance != null)
+            yield return ScreenFader.Instance.FadeIn();
     }
 
     private void TryDropRoomCard()

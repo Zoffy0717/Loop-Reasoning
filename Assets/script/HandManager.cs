@@ -29,8 +29,7 @@ public class HandManager : MonoBehaviour
     {
         if (cardInventory == null)
         {
-            Debug.LogError("HandManager: cardInventory not assigned.");
-            return;
+            cardInventory = FindObjectOfType<CardInventory>();
         }
     }
 
@@ -61,6 +60,7 @@ public class HandManager : MonoBehaviour
         foreach (var go in instantiatedCards)
             Destroy(go);
         instantiatedCards.Clear();
+        activeCardUIs.Clear();
 
         List<CardSY> cards = cardInventory.GetAllCards();
         int count = cards.Count;
@@ -94,7 +94,28 @@ public class HandManager : MonoBehaviour
         }
         // central index (0 based)
         float mid = (cardCount - 1) / 2f;
+        if (cardCount > 10)
+        {
+            spacing = 75f;
+            verticalSpacing = 0f;
+            fanSpread = 0f;
+        }
+        else
+        {
+            spacing = 100f;
+            verticalSpacing = 75f;
+            fanSpread = -7.5f;
+        }
+        if (cardCount > 20){
+            spacing = 50f;
+        }
 
+        if(isDragging)
+        {
+            spacing = 75f;
+            verticalSpacing = 0f;
+            fanSpread = 0f;
+        }
         for (int i = 0; i < cardCount; i++)
         {
             float rotationAngle = (fanSpread * (i - (cardCount-1) / 2f));
@@ -114,8 +135,8 @@ public class HandManager : MonoBehaviour
         foreach (var go in instantiatedCards)
             Destroy(go);
         instantiatedCards.Clear();
-
-        List<CardSY> cards = cardInventory.GetCardsByType(type); // assumes you added this
+        activeCardUIs.Clear();
+        List<CardSY> cards = cardInventory.GetCardsByType(type);
         foreach (var card in cards)
         {
             GameObject ui = Instantiate(cardUIPrefab, handTransform);
@@ -164,6 +185,7 @@ public class HandManager : MonoBehaviour
         foreach (var go in instantiatedCards)
             Destroy(go);
         instantiatedCards.Clear();
+        activeCardUIs.Clear();
 
         List<CardSY> cards = cardInventory.GetAllCards();
         List<CardSY> combinableCards = new List<CardSY>();
@@ -177,6 +199,12 @@ public class HandManager : MonoBehaviour
 
                 if (CombineSystem.CanCombine(cards[i], cards[j]))
                 {
+                    CardSY result = CombineSystem.GetResult(cards[i], cards[j]);
+
+                    // ✅ If result already owned, ignore this combo
+                    if (result != null && cardInventory.HasCard(result))
+                        continue;
+
                     if (!combinableCards.Contains(cards[i]))
                         combinableCards.Add(cards[i]);
                 }
@@ -190,6 +218,71 @@ public class HandManager : MonoBehaviour
             CardUI cardUI = ui.GetComponent<CardUI>();
             if (cardUI != null)
                 cardUI.Setup(card, reasoningBoardUI, this);
+                activeCardUIs.Add(cardUI);
+
+            instantiatedCards.Add(ui);
+        }
+
+        UpdateHandVisuals();
+    }
+
+    public void ShowTestimonyUsableCards()
+    {
+        foreach (var go in instantiatedCards)
+            Destroy(go);
+
+        instantiatedCards.Clear();
+        activeCardUIs.Clear();
+
+        List<CardSY> cards = cardInventory.GetAllCards();
+        List<CardSY> usableCards = new List<CardSY>();
+
+        // Check all 3-card combinations
+        for (int i = 0; i < cards.Count; i++)
+        {
+            for (int j = 0; j < cards.Count; j++)
+            {
+                for (int k = 0; k < cards.Count; k++)
+                {
+                    if (i == j || i == k || j == k) continue;
+
+                    if (testimonySystem.CanCombineThree(cards[i], cards[j], cards[k]))
+                    {
+                        CardSY result = testimonySystem.TryCombineThree(
+                            cards[i],
+                            cards[j],
+                            cards[k]
+                        );
+
+                        // Skip if result already owned
+                        if (result != null && cardInventory.HasCard(result))
+                            continue;
+
+                        // Add ALL involved cards
+                        if (!usableCards.Contains(cards[i]))
+                            usableCards.Add(cards[i]);
+
+                        if (!usableCards.Contains(cards[j]))
+                            usableCards.Add(cards[j]);
+
+                        if (!usableCards.Contains(cards[k]))
+                            usableCards.Add(cards[k]);
+                    }
+                }
+            }
+        }
+
+        // Build UI
+        foreach (var card in usableCards)
+        {
+            GameObject ui = Instantiate(cardUIPrefab, handTransform);
+            CardUI cardUI = ui.GetComponent<CardUI>();
+
+            if (cardUI != null)
+            {
+                cardUI.Setup(card, reasoningBoardUI, this);
+                activeCardUIs.Add(cardUI);
+            }
 
             instantiatedCards.Add(ui);
         }
@@ -221,12 +314,67 @@ public class HandManager : MonoBehaviour
 
     public void HighlightCompatibleCards(CardSY draggedCard)
     {
+        List<CardSY> allCards = cardInventory.GetAllCards();
+
         foreach (var ui in activeCardUIs)
         {
             if (ui == null || ui.cardData == null) continue;
             if (ui.cardData == draggedCard) continue;
 
-            bool compatible = CombineSystem.CanCombine(draggedCard, ui.cardData);
+            bool compatible = false;
+
+            if (reasoningBoardUI.isNormal)
+            {
+                compatible = CombineSystem.CanCombine(draggedCard, ui.cardData);
+            }
+            else
+            {
+                SlotDropArea[] slots =
+                reasoningBoardUI.testimonyBoard.GetComponentsInChildren<SlotDropArea>();
+
+                List<CardSY> slotCards = new List<CardSY>();
+
+                foreach (var s in slots)
+                {
+                    if (s.currentCard != null)
+                    {
+                        CardUI uiCard = s.currentCard.GetComponent<CardUI>();
+                        if (uiCard != null)
+                            slotCards.Add(uiCard.cardData);
+                    }
+                }
+
+                // CASE 1 — No slots filled
+                if (slotCards.Count == 0)
+                {
+                    compatible = testimonySystem.ExistsThreeCardRecipe(
+                        draggedCard,
+                        ui.cardData,
+                        allCards
+                    );
+                }
+
+                // CASE 2 — One slot filled
+                else if (slotCards.Count == 1)
+                {
+                    compatible = testimonySystem.CanCombineThree(
+                        slotCards[0],
+                        draggedCard,
+                        ui.cardData
+                    );
+                }
+
+                // CASE 3 — Two slots filled
+                else if (slotCards.Count == 2)
+                {
+                    compatible = testimonySystem.CanCombineThree(
+                        slotCards[0],
+                        slotCards[1],
+                        ui.cardData
+                    );
+                }
+            }
+
             ui.Highlight(compatible);
         }
     }
@@ -243,5 +391,29 @@ public class HandManager : MonoBehaviour
     public void SetDragging(bool dragging)
     {
         isDragging = dragging;
+    }
+
+    public void ShowNewCards()
+    {
+        foreach (var go in instantiatedCards)
+            Destroy(go);
+        instantiatedCards.Clear();
+
+        List<CardSY> newCards = cardInventory.ConsumeNewCards();
+
+        if (newCards.Count == 0)
+            return;
+
+        foreach (var card in newCards)
+        {
+            GameObject ui = Instantiate(cardUIPrefab, handTransform);
+            CardUI cardUI = ui.GetComponent<CardUI>();
+            if (cardUI != null)
+                cardUI.Setup(card, reasoningBoardUI, this);
+
+            instantiatedCards.Add(ui);
+        }
+
+        UpdateHandVisuals();
     }
 }

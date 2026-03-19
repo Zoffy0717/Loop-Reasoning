@@ -102,6 +102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0585a7e8ff6096a4da0a1af21918c284, type: 2}
   autoDropOnEnter: 0
   destroyAfter: 1
+  scheduledItemID: 3013
 --- !u!58 &6542388902924601649
 CircleCollider2D:
   m_ObjectHideFlags: 0

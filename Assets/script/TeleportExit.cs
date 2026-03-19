@@ -8,6 +8,9 @@ public class TeleportExit : MonoBehaviour, IInteractable
     private GameObject player;
     public string roomID;
 
+    public CameraFollow cameraFollow;
+    public Collider2D roomBounds;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -38,7 +41,11 @@ public class TeleportExit : MonoBehaviour, IInteractable
 
         player.transform.position = destinationPoint.position;
 
+        cameraFollow.SetRoomBounds(roomBounds);
+
         yield return new WaitForSeconds(0.1f);
+
+        AudioManager.Instance.StopOverrideMusic();
 
         if (ScreenFader.Instance != null)
             yield return ScreenFader.Instance.FadeIn();

@@ -21,25 +21,35 @@ public class AccusationManager : MonoBehaviour
     private CardInventory cardInventory;
 
     private float introDuration = 2f;
-
     void Start()
     {
-        // Find CardInventory across scenes (persistent manager)
         cardInventory = FindObjectOfType<CardInventory>();
 
         board.SetActive(true);
+
+        int availableChoices = 0;
 
         foreach (var s in suspects)
         {
             bool hasEvidence =
                 cardInventory != null &&
-                cardInventory.HasCard(s.requiredEvidenceCardID);
+                cardInventory.HasAnyCard(s.requiredEvidenceCardIDs);
 
-            s.Init(this, hasEvidence);
+            if (hasEvidence)
+            {
+                availableChoices++;
+            }
+
+            s.Init(this, cardInventory);
         }
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
+
+        if (availableChoices == 0)
+        {
+            StartCoroutine(RestartGame());
+        }
     }
 
     public void SelectSuspect(AccusationCharacterButton suspect)
@@ -80,10 +90,24 @@ public class AccusationManager : MonoBehaviour
 
     private IEnumerator RestartGame()
     {
+        board.SetActive(false);
         restartPanel.SetActive(true);
         yield return new WaitForSeconds(introDuration);
         SceneManager.LoadScene(1);
         GameStateManager.Instance.StartDay1();
         
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void CompleteRestart()
+    {
+        Destroy(GameObject.Find("GM"));
+        Destroy(GameObject.Find("AudioManager"));
+        Destroy(GameObject.Find("FadeCanvas"));
+        SceneManager.LoadScene(1);
     }
 }

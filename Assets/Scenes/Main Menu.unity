@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 1154768900}
   - component: {fileID: 1154768899}
   - component: {fileID: 1154768903}
+  - component: {fileID: 1154768904}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -730,28 +731,125 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   introPanel: {fileID: 408998119}
   introText: {fileID: 2071193427}
+  transition: {fileID: 8300000, guid: b5773daae89f6df49b37e7c9712ba0ef, type: 3}
   textsPerSecond:
-  - Rain taps softly against the window, and the wooden floor of your apartment creaks
-    beneath your slow, familiar steps.
-  - "Tonight should have been like any other night\u2014"
-  - a cup of warm tea, a few pages of an old book, and the gentle drift into shallow
-    sleep beneath a dim lamp.
-  - 'But then you found the postcard.A serene valley stretches across the glossy
+  - "Rain taps softly against the window, and the wooden floor of your apartment
+    creaks beneath your slow, familiar steps. Tonight should have been like any other
+    night\u2014"
+  - 'a cup of warm tea, a few pages of an old book, and the gentle drift into shallow
+    sleep beneath a dim lamp.  '
+  - 'But then you found the postcard. A serene valley stretches across the glossy
     surface: snow-covered peaks, a lake wrapped in dark pines, and a mountain lodge
     standing quietly under a plume of chimney smoke.'
-  - "You recognized it instantly\u2014The Lodge.Tucked beside it was a torn piece
+  - "You recognized it instantly\u2014The Lodge. Tucked beside it was a torn piece
     of a local newspaper, the edges wrinkled and damp from the rain:\u201CGrant Lodge
     to be auctioned later this month. Rumors persist regarding the unresolved death
     of its owner."
-  - "Your hand pauses, fingertips brushing the rough paper.How long has it been?Ten
-    years? Twenty?Time has blunted many memories, softened others, and buried some
-    entirely\u2014but not that winter night.Not the shouting, the fear,and the truths
-    that were never spoken aloud."
-  - "You sit by the window.Outside, night presses against the glass, reflecting your
-    aging silhouette back at you\u2014faint, ghostlike.Something deep within you
-    stirs, a forgotten ache:the lingering weight of a case you never truly closed."
-  - "You close your eyes.The wind howls.The lodge returns.Footsteps.A broken glass.A
-    stopped watch.A body in the snow\u2026\u2026"
+  - "Your hand pauses, fingertips brushing the rough paper.How long has it been?
+    Ten years? Twenty? Time has blunted many memories, softened others, and buried
+    some entirely\u2014but not that winter night. Not the shouting, the fear, and
+    the truths that were never spoken aloud. "
+  - "You sit by the window. Outside, night presses against the glass, reflecting
+    your aging silhouette back at you\u2014faint, ghostlike. Something deep within
+    you stirs, a forgotten ache: the lingering weight of a case you never truly closed. "
+  - "You close your eyes. The wind howls. The lodge returns.Footsteps. A broken glass.
+    A stopped watch. A body in the snow\u2026\u2026"
+--- !u!82 &1154768904
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154768898}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f26a7865ee6a0e3448b74bb4960fd422, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1342625809
 GameObject:
   m_ObjectHideFlags: 0

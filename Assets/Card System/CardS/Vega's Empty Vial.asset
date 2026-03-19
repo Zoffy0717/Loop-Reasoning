@@ -16,5 +16,6 @@ MonoBehaviour:
   displayName: Vega's Empty Vial
   type: 3
   artwork: {fileID: 21300000, guid: 4318df66132f92b42a65b1ff3fc7e6a6, type: 3}
-  description: 
+  description: "An empty vial found among Vega\u2019s belongings, with traces of
+    a truth-serum compound clinging to the glass."
   keywords: []

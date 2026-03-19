@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class ItemSpawnManager : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class ItemSpawnManager : MonoBehaviour
     {
         BuildRoomDictionary();
 
-        LoadPickedItemFlags();     // (Optional) persistent future feature
+        LoadPickedItemFlags(); 
         SpawnItemsForCurrentState();
 
         SubscribeToGameStateEvents();
@@ -138,17 +139,12 @@ public class ItemSpawnManager : MonoBehaviour
                 Quaternion.identity
             );
 
-            //var flag = item.AddComponent<ItemPickupFlag>();
-            //flag.myID = schedule.itemID;
-
             activeItems.Add(item);
         }
     }
 
-    // -------------------------------------------------------------
     // Call this when an item is picked up
-    // (ExplorationNode will notify us)
-    // -------------------------------------------------------------
+
     public void MarkItemPicked(string itemID)
     {
         if (!pickedItemIDs.Contains(itemID))
@@ -158,5 +154,21 @@ public class ItemSpawnManager : MonoBehaviour
     private void LoadPickedItemFlags()
     {
         pickedItemIDs.Clear();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        BuildRoomDictionary();
+        RespawnItems();
     }
 }

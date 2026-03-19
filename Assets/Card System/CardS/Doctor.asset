@@ -16,5 +16,6 @@ MonoBehaviour:
   displayName: Dr. Anna DeWitt
   type: 2
   artwork: {fileID: 21300000, guid: 428e43bd31a88954d8aaa3976f2aaf74, type: 3}
-  description: 
+  description: "One of the few doctors in town\u2014skilled, exhausted, and carrying
+    more than she lets on."
   keywords: []

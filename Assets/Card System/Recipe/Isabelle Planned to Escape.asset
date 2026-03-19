@@ -15,5 +15,5 @@ MonoBehaviour:
   inputCardIDs:
   - 4008
   - 4013
-  - 4020
+  - 4019
   resultCard: {fileID: 11400000, guid: a1f8ddd2f0adebc4eb96ba925fb49186, type: 2}

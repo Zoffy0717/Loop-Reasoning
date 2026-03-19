@@ -248,8 +248,9 @@ GameObject:
   - component: {fileID: 3821475806090565278}
   - component: {fileID: 1612428873024216013}
   - component: {fileID: 3105130887608476685}
+  - component: {fileID: 6342955677825511094}
   m_Layer: 6
-  m_Name: Arthur
+  m_Name: Arthur 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +266,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -6.95, y: -16.7, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7019506786176385879}
@@ -373,3 +374,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.84, y: 10.799999}
   m_Direction: 0
+--- !u!114 &6342955677825511094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9007784974401491586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce911f6b929d7b4ab6eed642f362411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSet: {fileID: 11400000, guid: 1a439cf20a9113d4ca520d0f3edc2257, type: 2}

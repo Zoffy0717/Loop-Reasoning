@@ -40,7 +40,7 @@ public class GameStateManager : MonoBehaviour
     public event Action OnDayAdvanced;
     public event Action OnAPChanged;
 
-    private bool day1Started = false;
+    //private bool day1Started = false;
     
     //track room that entered
     private Dictionary<string, DayType> roomVisitRecord = new Dictionary<string, DayType>();
@@ -64,6 +64,12 @@ public class GameStateManager : MonoBehaviour
             actionPointsRemaining = maxAP;
     }
 
+    void Start()
+    {
+        OnTimeAdvanced += HandleAudioUpdate;
+        OnDayAdvanced += HandleAudioUpdate;
+        restUI.SetActive(false);
+    }
     void Update()
     {
         if(currentDay != DayType.Day0)
@@ -106,7 +112,7 @@ public class GameStateManager : MonoBehaviour
     public void StartDay1()
     {
         //if (day1Started) return;
-        day1Started = true;
+        //day1Started = true;
         currentDay = DayType.Day1;
         currentPeriod = TimePeriod.Morning;
 
@@ -199,5 +205,34 @@ public class GameStateManager : MonoBehaviour
     public bool HasEnoughActionPoints(int cost)
     {
         return actionPointsRemaining >= cost;
+    }
+
+    private void HandleAudioUpdate()
+    {
+        var audio = AudioManager.Instance;
+        if (audio == null) return;
+
+        if (currentPeriod == TimePeriod.Morning)
+            audio.PlayMusic(audio.day1MorningMusic);
+        else if (currentPeriod == TimePeriod.Noon)
+            audio.PlayMusic(audio.day1NoonMusic);
+        else if (currentPeriod == TimePeriod.Night)
+            audio.PlayMusic(audio.day1NightMusic);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        restUI = GameObject.Find("Sleep");
+        restUI.SetActive(false);
     }
 }

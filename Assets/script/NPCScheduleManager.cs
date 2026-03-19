@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCScheduleManager : MonoBehaviour
 {
@@ -22,10 +23,10 @@ public class NPCScheduleManager : MonoBehaviour
 
     void Start()
     {
+        activeNPCs = new List<GameObject>();
         BuildRoomDictionary();
         SubscribeToGameStateEvents();
         UpdateStateFromGameStateManager();
-        SpawnNPCsForCurrentState();
     }
 
     private void SubscribeToGameStateEvents()
@@ -61,10 +62,17 @@ public class NPCScheduleManager : MonoBehaviour
 
     private void RespawnNPCs()
     {
-        ClearNPCs();
-        SpawnNPCsForCurrentState();
+        StartCoroutine(RespawnRoutine());
     }
 
+    private IEnumerator RespawnRoutine()
+    {
+        ClearNPCs();
+
+        yield return null;
+
+        SpawnNPCsForCurrentState();
+    }
 
     void BuildRoomDictionary()
     {
@@ -117,11 +125,28 @@ public class NPCScheduleManager : MonoBehaviour
 
     void ClearNPCs()
     {
+        Debug.Log("Clearing NPCs: " + activeNPCs.Count);
         foreach (var npc in activeNPCs)
         {
             if (npc != null)
                 Destroy(npc);
         }
         activeNPCs.Clear();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        BuildRoomDictionary();
+        RespawnNPCs();
     }
 }

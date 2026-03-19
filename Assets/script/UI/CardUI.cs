@@ -44,7 +44,6 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (this == null || cardData == null) return;
-
         handManager?.SetDragging(true);
 
         originalParent = transform.parent;
@@ -60,6 +59,10 @@ public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         }
 
         if (handManager != null)
+            if (reasoningBoard.isNormal)
+            {
+                handManager.HighlightCompatibleCards(cardData);
+            }
             handManager.HighlightCompatibleCards(cardData);
 
         if (reasoningBoard != null && reasoningBoard.cardDetailUI != null)

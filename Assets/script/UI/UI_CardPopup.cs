@@ -25,7 +25,7 @@ public class UI_CardPopup : MonoBehaviour
     {
         if (!isOpen) return;
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Escape))
         {
             ShowNextOrClose();
         }

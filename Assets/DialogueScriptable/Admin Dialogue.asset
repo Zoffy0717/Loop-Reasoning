@@ -18,10 +18,10 @@ MonoBehaviour:
     dialogue: {fileID: 11400000, guid: 87e069cdc1d96f645851bf9ec0d5129a, type: 2}
   - day: 1
     time: 0
-    dialogue: {fileID: 11400000, guid: 37a869e238a28e04ebb2946ad3832d3e, type: 2}
+    dialogue: {fileID: 11400000, guid: 1afd952ca936e564d8676b21af12c53f, type: 2}
   - day: 2
     time: 0
-    dialogue: {fileID: 11400000, guid: 87e069cdc1d96f645851bf9ec0d5129a, type: 2}
+    dialogue: {fileID: 11400000, guid: 37a869e238a28e04ebb2946ad3832d3e, type: 2}
   - day: 2
     time: 1
     dialogue: {fileID: 11400000, guid: 87e069cdc1d96f645851bf9ec0d5129a, type: 2}

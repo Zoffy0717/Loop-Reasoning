@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ReasoningBoardUI : MonoBehaviour
 {
@@ -25,7 +26,12 @@ public class ReasoningBoardUI : MonoBehaviour
     private CardSY slotACard;
     private CardSY slotBCard;
     private bool isOpen = false;
+    public bool isNormal;
 
+    void Start()
+    {
+        playerInventory = FindObjectOfType<CardInventory>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -48,13 +54,19 @@ public class ReasoningBoardUI : MonoBehaviour
         // Refresh cards when board opens
         if (show && handManager != null)
         {
-            handManager.RefreshHand();
+            AudioManager.Instance.PlayReasoningMusic();
+            if (playerInventory.HasNewCards())
+                handManager.ShowNewCards();
+            else
+                handManager.RefreshHand();
         }
 
         // Optionally reset slots or selections here
         if (!show)
         {
             ClearSlots();
+            AudioManager.Instance.ResumeNormalMusic();
+
         }
     }
     
@@ -105,6 +117,7 @@ public class ReasoningBoardUI : MonoBehaviour
         testimonyBoard.SetActive(false);
 
         ClearAllSlots(normalBoard);
+        isNormal = true;
     }
 
     public void ShowTestimonyBoard()
@@ -113,6 +126,7 @@ public class ReasoningBoardUI : MonoBehaviour
         testimonyBoard.SetActive(true);
 
         ClearAllSlots(testimonyBoard);
+        isNormal = false;
     }
 
 
@@ -183,6 +197,25 @@ public class ReasoningBoardUI : MonoBehaviour
             }
         }
     }
+
+    //for after scene reload
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
+    }
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var inv = FindObjectOfType<CardInventory>();
+        if (inv != null)
+            playerInventory = inv;
+    }
+
 }
 
 
